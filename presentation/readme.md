@@ -7,11 +7,16 @@ rendered as a presentation using
 #### Editing
 
 For a basic overview of markdown see [John Gruber's
-documentation](http://daringfireball.net/projects/markdown/).
+documentation](http://daringfireball.net/projects/markdown/). Though the
+[markdown parser](https://github.com/chjj/marked) reveal.js uses actually
+supports quite a few more extensions.
 
 You will want to edit the `presentation.md` file. Each slide is separated by
 two empty lines. 
 
+For an example of a markdown presentation check out any of Dr.Collards notes,
+or [my first SEV
+presentation](https://github.com/EvanPurkhiser/Presentations/blob/gh-pages/presentations/04-09-13-SEV-software-aging.md).
 
 #### Viewing the presentation
 
