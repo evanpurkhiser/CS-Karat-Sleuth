@@ -1,0 +1,33 @@
+### Karat Sleuth presentation
+
+This is for our project proposal presentation. It's written in markdown and
+rendered as a presentation using
+[Reveal.js](https://github.com/hakimel/reveal.js).
+
+#### Editing
+
+For a basic overview of markdown see [John Gruber's
+documentation](http://daringfireball.net/projects/markdown/).
+
+You will want to edit the `presentation.md` file. Each slide is separated by
+two empty lines. 
+
+
+#### Viewing the presentation
+
+The easiest way to view the presentation is to use pythons built in HTTP
+server.
+
+````sh
+$ cd presentations
+$ python -m SimpleHTTPServer
+Serving HTTP 0.0.0.0 port 8000 ...
+```
+
+Then in a web browser load <http://localhost:8000/presentation.html>. If you're
+changes don't show up as you're editing the presentation then you may have to
+clear you're cache or do a hard refresh.
+
+#### Other Themes
+
+If anyone on the team is insterested, we could use a different reveal.js theme. Check them out [here](http://lab.hakim.se/reveal-js/#/themes).
