@@ -29,7 +29,7 @@ $ python -m SimpleHTTPServer
 Serving HTTP 0.0.0.0 port 8000 ...
 ```
 
-Then in a web browser load <http://localhost:8000/presentation.html>. If you're
+Then in a web browser load <http://localhost:8000/presentation.html>. If your
 changes don't show up as you're editing the presentation then you may have to
 clear you're cache or do a hard refresh.
 
