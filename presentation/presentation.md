@@ -54,3 +54,7 @@ what is and is not SPAM
    * Make use of Ruby's bountiful Open Source libraries
  * Simple command line interface for usage
  * Possible implementation into a simple web interface
+
+
+## Karet Sleuth
+Anything implemented in Ruby must have a silly name  
