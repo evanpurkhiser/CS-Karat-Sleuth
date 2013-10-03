@@ -9,7 +9,7 @@ what is and is not SPAM
 # How It Works
 
 
-## Bayesian Statistics
+## Bayesian Filtering
 
  * Content based filtering - weighted words or phrases
    * "Canadian pharmacy"
