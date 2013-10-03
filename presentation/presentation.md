@@ -6,11 +6,14 @@ A SPAM Email detection tool that uses various heuristics and continually learns
 what is and is not SPAM
 
 
-## Training Data
-* [CSDMC2010 SPAM corpus](http://csmining.org/index.php/spam-email-datasets-.html)
-* 4327 messages
+## Available Training Data
+
+* [CSDMC2010 SPAM corpus](http://csmining.org/index.php/spam-email-datasets-.html) (4327 included emails)
   * 2949 HAM
   * 1378 SPAM
+* [SPAM Assassin](http://spamassassin.apache.org/publiccorpus/) (6047 included emails)
+  * ~4000 HAM
+  * ~1900 SPAM
 
 
 ## Heuristics
