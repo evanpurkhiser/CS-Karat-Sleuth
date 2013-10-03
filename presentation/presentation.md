@@ -47,7 +47,7 @@ what is and is not SPAM
  * Can test against a single email and provide detailed overview of the message
 
 
-## Implantation
+## Implementation
 
  * Written in the Ruby language
    * Take advantage of ruby's expansive standard library
@@ -56,5 +56,5 @@ what is and is not SPAM
  * Possible implementation into a simple web interface
 
 
-## Karet Sleuth
+## Karat Sleuth
 Anything implemented in Ruby must have a silly name  
