@@ -36,9 +36,21 @@ what is and is not SPAM
  * Any other viable methods we can find
 
 
+# Program Details
 
-## Program Details
-* Written in Ruby
-* Command line user interface
-* Parses directories or files
-* Sorts messages into SPAM/HAM categories
+
+## Usage
+
+ * Able to parse entire directories or single email messages
+ * Can sort a set of messages into SPAM/HAM categories
+ * Can test against known set of SPAM/HAM and return accuracy statistics
+ * Can test against a single email and provide detailed overview of the message
+
+
+## Implantation
+
+ * Written in the Ruby language
+   * Take advantage of ruby's expansive standard library
+   * Make use of Ruby's bountiful Open Source libraries
+ * Simple command line interface for usage
+ * Possible implementation into a simple web interface
