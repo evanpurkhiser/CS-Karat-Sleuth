@@ -15,6 +15,9 @@ what is and is not SPAM
    * "Canadian pharmacy"
    * "viagra"
    * "hair transplant"
+ * Derivation of Bayes' theorem
+
+![Probability that message is spam, given that it contains a particular word W](http://upload.wikimedia.org/math/a/6/e/a6e7f8c521dcf018b6480a8967773ac3.png)
 
 
 ## Available Training Data
