@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+# Handle passing in argv to either the learning part of the program or the
+# checker part of the program. It's probably a good idea to let the first
+# argument be the sub-command ('learn','check').
+
+puts "Do magic now!"
