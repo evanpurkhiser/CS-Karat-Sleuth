@@ -5,7 +5,7 @@ namespace :training do
 	directory 'tmp'
 	directory 'training_sets'
 
-	task :download => ['CSDMC2010_SPAM.zip']
+	multitask :download => ['CSDMC2010_SPAM.zip']
 
 	file 'CSDMC2010_SPAM.zip' => 'tmp' do
 		# download this particular dataset
