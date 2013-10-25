@@ -4,4 +4,18 @@
 # checker part of the program. It's probably a good idea to let the first
 # argument be the sub-command ('learn','check').
 
-puts "Do magic now!"
+# Determine whether to use data as testing or training set
+dataType = ARGV[0]
+if (dataType != "learn" && dataType != "check")
+	puts "Invalid command. Usages:"
+	puts "  karatsleuth learn <data-directory>"
+	puts "  karatsleuth check <data-directory>"
+	exit
+end
+
+# Get directory for data and verify its existence
+dataDir = ARGV[1]
+if !File.directory?(dataDir)
+	puts dataDir + ": No such directory."
+	exit
+end
