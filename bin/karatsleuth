@@ -17,7 +17,7 @@ end
 
 # Get directory for data and verify its existence
 dataDir = ARGV[1]
-if !File.directory?(dataDir)
+unless File.directory? dataDir
 	puts dataDir + ": No such directory."
 	exit
 end
