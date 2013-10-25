@@ -4,6 +4,8 @@
 # checker part of the program. It's probably a good idea to let the first
 # argument be the sub-command ('learn','check').
 
+require 'mail'
+
 # Determine whether to use data as testing or training set
 dataType = ARGV[0]
 if (dataType != "learn" && dataType != "check")
@@ -18,4 +20,15 @@ dataDir = ARGV[1]
 if !File.directory?(dataDir)
 	puts dataDir + ": No such directory."
 	exit
+end
+
+if (dataType == "learn")
+	# This should probably be in the library instead
+	# Read in each item within the directory
+	Dir.foreach(dataDir) do |item|
+		next if item == '.' or item == '..'
+		data = "#{dataDir}/#{item}"
+		mail = Mail.read(data)
+		# Use contents of mail to add into knowledge base
+	end
 end
