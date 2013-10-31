@@ -16,13 +16,18 @@ namespace :training do
 		'20050311_spam_2.tar.bz2'     => 'http://spamassassin.apache.org/publiccorpus/20050311_spam_2.tar.bz2',
 	}
 
+	# Training data will be stored in the tmp directory. Prefix all names
+	training_data = Hash[training_data.map { |k, v| [File.join('tmp', k), v] }]
+
+	# Task to download all defined spam sets
+	task :download => training_data.keys
+
 	directory 'tmp'
 	directory 'training_sets'
 
-	multitask :download => ['CSDMC2010_SPAM.zip']
-
-	file 'CSDMC2010_SPAM.zip' => 'tmp' do
-		# download this particular dataset
+	# Create download tasks for each file
+	training_data.each do |name, url|
+		file(name => 'tmp') { sh 'wget', '-O', name, url }
 	end
 
 	task :normalize do
