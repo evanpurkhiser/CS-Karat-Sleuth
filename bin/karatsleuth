@@ -12,7 +12,7 @@ expectedArg = "Possible inputs:
   karatsleuth <unclassified-dir> {spam,ham}"
 
 # Set data directory to project root by default
-dataDir = File.expand_path("../training_sets/", Dir.pwd)
+dataDir = File.expand_path("../training/", Dir.pwd)
 
 if ARGV.length > 2
 	puts "Too many arguments. " + expectedArg
