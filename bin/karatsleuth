@@ -1,34 +1,35 @@
 #!/usr/bin/env ruby
 
 # Handle passing in argv to either the learning part of the program or the
-# checker part of the program. It's probably a good idea to let the first
-# argument be the sub-command ('learn','check').
+# checker part of the program. Comamand line arguments range from 0 to 3
 
 require 'mail'
 
-# Determine whether to use data as testing or training set
-dataType = ARGV[0]
-if (dataType != "learn" && dataType != "check")
-	puts "Invalid command. Usages:"
-	puts "  karatsleuth learn <data-directory>"
-	puts "  karatsleuth check <data-directory>"
-	exit
+# Set data directory to project root by default
+dataDir = File.expand_path("../training_sets/", Dir.pwd)
+
+# If given the directory, look for separated ham/spam folders with emails
+if ARGV.length >= 1
+	dataDir = ARGV[0]
 end
 
-# Get directory for data and verify its existence
-dataDir = ARGV[1]
+# If the directory has been classified as ham/spam
+if ARGV.length == 2
+	dataType = ARGV[1]
+	exit if dataType != "spam" && dataType != "ham"
+end
+
+# Verify existence of training data
 unless File.directory? dataDir
 	puts dataDir + ": No such directory."
 	exit
 end
 
-if (dataType == "learn")
-	# This should probably be in the library instead
-	# Read in each item within the directory
-	Dir.foreach(dataDir) do |item|
-		next if item == '.' or item == '..'
-		data = "#{dataDir}/#{item}"
-		mail = Mail.read(data)
-		# Use contents of mail to add into knowledge base
-	end
+# This should probably be in the library instead
+# Read in each item within the directory
+Dir.foreach(dataDir) do |item|
+	next if item == '.' or item == '..'
+	data = "#{dataDir}/#{item}"
+	mail = Mail.read(data)
+	# Use contents of mail to add into knowledge base
 end
