@@ -57,7 +57,7 @@ namespace :training do
 			folder = File.join 'tmp', name.match(/[0-9]+_(.*)\.tar\.bz2/)[1]
 
 			# Where to extract the email messages to
-			target  = File.join 'training_sets', difficulty, type
+			target  = File.join 'training', difficulty, type
 			tarball = File.join 'tmp', name
 
 			# Extract the messages to the tmp directory
@@ -90,8 +90,8 @@ namespace :training do
 			spam_map = Hash[spam_labels.map { |line| [line[1..-1].strip, !line[0].to_i.zero?] }]
 
 			# Contains both spam and ham files
-			mkdir_p 'training_sets/unknown/spam'
-			mkdir_p 'training_sets/unknown/ham'
+			mkdir_p 'training/unknown/spam'
+			mkdir_p 'training/unknown/ham'
 
 			Dir.glob(File.join(folder, 'TRAINING', '*.eml')) do |filename|
 				# The filename of the file should be it's MD5 checksum
@@ -100,7 +100,7 @@ namespace :training do
 				# Check if it's SPAM or HAM
 				type = spam_map[File.basename filename] ? 'spam' : 'ham'
 
-				mv filename, File.join('training_sets/unknown', type, new_name)
+				mv filename, File.join('training/unknown', type, new_name)
 			end
 
 			rm_r 'tmp/CSDMC2010_SPAM'
