@@ -11,6 +11,16 @@ dataDir = File.expand_path("../training_sets/", Dir.pwd)
 # If given the directory, look for separated ham/spam folders with emails
 if ARGV.length >= 1
 	dataDir = ARGV[0]
+	hamDir = dataDir + "/ham"
+	spamDir = dataDir + "/spam"
+	unless File.directory? hamDir
+		puts hamDir + ": No such directory."
+		exit
+	end
+	unless File.directory? spamDir
+		puts spamDir + ": No such directory."
+		exit
+	end
 end
 
 # If the directory has been classified as ham/spam
