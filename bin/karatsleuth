@@ -14,6 +14,11 @@ expectedArg = "Possible inputs:
 # Set data directory to project root by default
 dataDir = File.expand_path("../training_sets/", Dir.pwd)
 
+if ARGV.length > 2
+	puts "Too many arguments. " + expectedArg
+	exit
+end
+
 # If given the directory, look for separated ham/spam folders with emails
 if ARGV.length >= 1
 	dataDir = ARGV[0]
