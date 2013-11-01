@@ -30,7 +30,6 @@ namespace :training do
 		file(name => 'tmp') { sh 'wget', '-O', name, url }
 	end
 
-
 	# Normalization organizes email message into groups based on the
 	# 'difficulty' of the messages and based on weather the messages are known
 	# spam / ham.
@@ -64,7 +63,7 @@ namespace :training do
 			sh "tar -xf #{tarball} -C tmp"
 			mkdir_p target
 
-			Dir.glob(File.join(folder, '*.*')) do |filename|
+			Dir.glob File.join(folder, '*.*') do |filename|
 				# The filename of the file should be it's MD5 checksum
 				new_name = Digest::MD5.hexdigest(File.read filename) + '.msg'
 				mv filename, File.join(target, new_name)
@@ -93,7 +92,7 @@ namespace :training do
 			mkdir_p 'training/unknown/spam'
 			mkdir_p 'training/unknown/ham'
 
-			Dir.glob(File.join(folder, 'TRAINING', '*.eml')) do |filename|
+			Dir.glob File.join(folder, 'TRAINING', '*.eml') do |filename|
 				# The filename of the file should be it's MD5 checksum
 				new_name = Digest::MD5.hexdigest(File.read filename) + '.msg'
 
@@ -106,4 +105,5 @@ namespace :training do
 			rm_r 'tmp/CSDMC2010_SPAM'
 		end
 	end
+
 end
