@@ -5,6 +5,12 @@
 
 require 'mail'
 
+# Expected input for error messages
+expectedArg = "Possible inputs:
+  karatsleuth 
+  karatsleuth <classified-dir>
+  karatsleuth <unclassified-dir> {spam,ham}"
+
 # Set data directory to project root by default
 dataDir = File.expand_path("../training_sets/", Dir.pwd)
 
@@ -14,11 +20,11 @@ if ARGV.length >= 1
 	hamDir = dataDir + "/ham"
 	spamDir = dataDir + "/spam"
 	unless File.directory? hamDir
-		puts hamDir + ": No such directory."
+		puts hamDir + ": No such directory. " + expectedArg
 		exit
 	end
 	unless File.directory? spamDir
-		puts spamDir + ": No such directory."
+		puts spamDir + ": No such directory. " + expectedArg
 		exit
 	end
 end
@@ -27,14 +33,14 @@ end
 if ARGV.length == 2
 	dataType = ARGV[1]
 	if dataType != "spam" && dataType != "ham"
-		puts "Invalid argument. Expected: karatsleuth directory {spam,ham}"
+		puts "Invalid argument. " + expectedArg
 		exit
 	end
 end
 
 # Verify existence of training data
 unless File.directory? dataDir
-	puts dataDir + ": No such directory."
+	puts dataDir + ": No such directory. " + expectedArg
 	exit
 end
 
