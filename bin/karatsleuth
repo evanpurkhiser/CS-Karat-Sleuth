@@ -26,7 +26,10 @@ end
 # If the directory has been classified as ham/spam
 if ARGV.length == 2
 	dataType = ARGV[1]
-	exit if dataType != "spam" && dataType != "ham"
+	if dataType != "spam" && dataType != "ham"
+		puts "Invalid argument. Expected: karatsleuth directory {spam,ham}"
+		exit
+	end
 end
 
 # Verify existence of training data
