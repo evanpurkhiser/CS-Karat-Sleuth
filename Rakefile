@@ -1,4 +1,5 @@
 require "bundler/gem_tasks"
+require "digest/md5"
 
 namespace :training do
 
@@ -61,13 +62,14 @@ namespace :training do
 
 			# Extract the messages to the tmp directory
 			sh "tar -xf #{tarball} -C tmp"
-
-			# Remove unsed 'cmds' file
-			rm File.join folder, 'cmds'
-
 			mkdir_p target
-			mv Dir.glob(File.join(folder, '*')), target
-			rmdir folder
+
+			Dir.glob(File.join(folder, '*.*')) do |filename|
+				# The filename of the file should be it's MD5 checksum
+				new_name = Digest::MD5.hexdigest(File.read filename) + '.msg'
+				mv filename, File.join(target, new_name)
+			end
+			rm_r folder
 		end
 
 		# Normalize the CSMINING spam corpus
