@@ -73,6 +73,37 @@ namespace :training do
 		end
 
 		# Normalize the CSMINING spam corpus
+		#
+		# The CSMINING 2010 spam corpus contains a set of training data under
+		# the TRAINING folder. However, this isn't organized into spam vs ham in
+		# the directory tree. Instead the 'SPAMTrain.label' file contains a list
+		# of files and if they are spam or not.
+		#
+		# Move each file into the correct directory for spam vs ham
+		begin
+			# Extract the contents of the file
+			sh "unzip -q -o tmp/CSDMC2010_SPAM.zip -d tmp"
+			folder = 'tmp/CSDMC2010_SPAM/CSDMC2010_SPAM'
 
+			# Map the filename to the boolean value of if it is spam or not
+			spam_labels = File.readlines(File.join(folder, 'SPAMTrain.label'))
+			spam_map = Hash[spam_labels.map { |line| [line[1..-1].strip, !line[0].to_i.zero?] }]
+
+			# Contains both spam and ham files
+			mkdir_p 'training_sets/unknown/spam'
+			mkdir_p 'training_sets/unknown/ham'
+
+			Dir.glob(File.join(folder, 'TRAINING', '*.eml')) do |filename|
+				# The filename of the file should be it's MD5 checksum
+				new_name = Digest::MD5.hexdigest(File.read filename) + '.msg'
+
+				# Check if it's SPAM or HAM
+				type = spam_map[File.basename filename] ? 'spam' : 'ham'
+
+				mv filename, File.join('training_sets/unknown', type, new_name)
+			end
+
+			rm_r 'tmp/CSDMC2010_SPAM'
+		end
 	end
 end
