@@ -27,7 +27,7 @@ namespace :training do
 
 	# Create download tasks for each file
 	download_tasks.each do |name, url|
-		file(name => 'tmp') { sh 'wget', '-O', name, url }
+		file(name => 'tmp') { sh 'curl', '-o', name, url }
 	end
 
 	# Normalization organizes email message into groups based on the
