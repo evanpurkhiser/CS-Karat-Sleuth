@@ -20,18 +20,24 @@ if ARGV.length > 2
 end
 
 # If given the directory, look for separated ham/spam folders with emails
+haveHam = true
+haveSpam = true
 if ARGV.length >= 1
 	dataDir = ARGV[0]
 	hamDir = dataDir + "/ham"
 	spamDir = dataDir + "/spam"
 	unless File.directory? hamDir
-		puts hamDir + ": No such directory. " + expectedArg
-		exit
+		haveHam = false
 	end
 	unless File.directory? spamDir
-		puts spamDir + ": No such directory. " + expectedArg
-		exit
+		haveSpam = false
 	end
+end
+
+# The directory could have either ham, spam, or both.
+if !haveSpam && !haveHam
+	puts "Could not find spam or ham directory. " + expectedArg
+	exit
 end
 
 # If the directory has been classified as ham/spam
@@ -51,9 +57,24 @@ end
 
 # This should probably be in the library instead
 # Read in each item within the directory
-Dir.foreach(dataDir) do |item|
-	next if item == '.' or item == '..'
-	data = "#{dataDir}/#{item}"
-	mail = Mail.read(data)
-	# Use contents of mail to add into knowledge base
+
+# Classify ham data sets
+if haveHam
+	Dir.foreach(hamDir) do |item|
+		next if item == '.' or item == '..'
+		data = "#{hamDir}/#{item}"
+		mail = Mail.read(data)
+		# Use contents of ham mail to add into knowledge base
+	end
 end
+
+# Classify spam data sets
+if haveSpam
+	Dir.foreach(spamDir) do |item|
+		next if item == '.' or item == '..'
+		data = "#{spamDir}/#{item}"
+		mail = Mail.read(data)
+		# Use contents of spam mail to add into knowledge base
+	end
+end
+
