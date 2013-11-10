@@ -8,9 +8,9 @@ require 'classifier'
 
 # Expected input for error messages
 expectedArg = "Possible inputs:
-  karatsleuth 
-  karatsleuth <classified-dir>
-  karatsleuth <unclassified-dir> {spam,ham}"
+  karat-sleuth
+  karat-sleuth <classified-dir>
+  karat-sleuth <unclassified-dir> {spam,ham}"
 
 # Set data directory to project root by default
 dataDir = File.expand_path("../training/", Dir.pwd)

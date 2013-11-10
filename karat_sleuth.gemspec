@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'KaratSleuth/version'
+require 'karat_sleuth/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "KaratSleuth"
+  spec.name          = "karat_sleuth"
   spec.version       = KaratSleuth::VERSION
   spec.authors       = ["Evan Purkhiser", "Heather Michaud", "Timmothy Mott"]
   spec.email         = ["evanpurkhiser@gmail.com", "hmm34@zips.uakron.edu", "mayaswrath@gmail.com"]
