@@ -16,12 +16,14 @@ what is and is not SPAM
 
 
 ## Example
+
  * ./karatsleuth
  * ./karatsleuth ../training/unknown
  * ./karatsleuth ../training/known ham
 
 
 ## Results
+
  * Ran karaatsleuth on training and testing data of size ~6300
    * Spam: ~5200
    * Ham:  ~1100
@@ -31,6 +33,7 @@ what is and is not SPAM
 
 
 ## Evaluation
+
  * High accuracy for spam could be due to a higher amount of training data for
  spam mail.
  * Results could be improved with more data
