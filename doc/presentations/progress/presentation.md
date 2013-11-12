@@ -11,7 +11,7 @@ what is and is not SPAM
  * Written as a ruby gem with a intuitive command line interface
  * Rake tasks to download and normalize training / testing data
  * Bayesian filtering / training performed on subject / body
- * Baysian category-word-tally triplets are stored in a SQLite
+ * Bayesian category-word-tally triplets are stored in a SQLite
  * A "classifying pipeline" is used to classify as spam or ham
 
 
@@ -26,12 +26,12 @@ We use some other ruby gems (packages)
 
  * [`classifier`](https://github.com/cardmagic/classifier)
 
-   Base-bone implementation of a Bayseian Classifier. We build on-top of this to
+   Base-bone implementation of a Bayesian Classifier. We build on-top of this to
    improve classification results
 
  * [`sequel`](https://github.com/jeremyevans/sequel)
 
-   Provides a extreamly flexible and ruby-centric API to different database
+   Provides a extremely flexible and ruby-centric API to different database
    backends - Used for SQLite manipulation
 
 
@@ -70,7 +70,7 @@ We use some other ruby gems (packages)
  spam mail
  * This also accounts for lower ham true positives (26% false negatives categorized as spam)
  * Results could be improved with more data
- * Results could be biased with ham messages beause ham content varies by user
+ * Results could be biased with ham messages because ham content varies by user
 
 
 ## Possible Future Work
