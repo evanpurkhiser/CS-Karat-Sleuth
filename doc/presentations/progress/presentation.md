@@ -17,9 +17,9 @@ what is and is not SPAM
 
 ## Example
 
- * ./karat-sleuth
- * ./karat-sleuth  ../training/unknown
- * ./karat-sleuth  ../training/known  {ham,spam}
+ * `./karat-sleuth`
+ * `./karat-sleuth ../training/unknown`
+ * `./karat-sleuth ../training/known {ham,spam}`
 
 
 ## Results
