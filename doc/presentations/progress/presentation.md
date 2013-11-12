@@ -67,6 +67,7 @@ We use some other ruby gems (packages)
 ## Results
 
  * Ran Karat Sleuth on training and testing data of size ~6300
+ * This was the "Unknown difficulty" training set
    * Spam: ~5200
    * Ham:  ~1100
  * Accuracy:
