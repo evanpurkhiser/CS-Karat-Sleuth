@@ -47,6 +47,16 @@ We use some other ruby gems (packages)
  * `training_sets/{hard,easy,unknown}/{spam,ham}/*.eml`
 
 
+### Classification 'pipeline'
+
+ * Each message being classified may be run through the 'pipeline' of classifiers
+ * Currently only one classifier is implemented
+   * Message content classifier (Use Bayesian filtering on subject / body)
+ * Classifiers simply implement a `classify?` method given a message object
+ * Ham and Spam probabilities from the classifier is used to determine the final
+   classification of a message
+
+
 ## Example
 
  * `./karat-sleuth`
@@ -76,8 +86,10 @@ We use some other ruby gems (packages)
 ## Possible Future Work
 
  * To improve results:
+   * Add additional pipeline classifiers such as..
    * Reverse DNS lookup on message sender
    * Domain Key Identified Mail verification
+   * Location based classifications
  * To improve usability:
    * Implementation into a simple web interface
    * Email client integration
