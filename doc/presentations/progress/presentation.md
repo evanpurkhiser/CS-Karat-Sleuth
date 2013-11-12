@@ -22,17 +22,17 @@ We use some other ruby gems (packages)
  * [`mail`](https://github.com/mikel/mail)
 
    Provides simple and efficient parsing and querying of raw email message
-   information
+   information.
 
  * [`classifier`](https://github.com/cardmagic/classifier)
 
    Base-bone implementation of a Bayesian Classifier. We build on-top of this to
-   improve classification results
+   improve classification results.
 
  * [`sequel`](https://github.com/jeremyevans/sequel)
 
    Provides an extremely flexible and ruby-centric API to different database
-   backends - Used for SQLite manipulation
+   backends - Used for SQLite manipulation.
 
 
 ### Data Normalization
