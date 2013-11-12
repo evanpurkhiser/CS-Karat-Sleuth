@@ -20,14 +20,17 @@ what is and is not SPAM
 We use some other ruby gems (packages)
 
  * [`mail`](https://github.com/mikel/mail)
+
    Provides simple and efficent parsing and querying of raw email message
    information
 
  * [`classifier`](https://github.com/cardmagic/classifier)
+
    Base-bone implementation of a Bayseian Classifier. We build on-top of this to
    improve classification results
 
  * [`sequel`](https://github.com/jeremyevans/sequel)
+
    Provides a extreamly flexible and ruby-centric API to different database
    backends - Used for SQLite manipulation
 
