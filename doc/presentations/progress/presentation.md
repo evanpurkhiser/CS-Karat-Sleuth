@@ -57,11 +57,36 @@ We use some other ruby gems (packages)
    classification of a message
 
 
-## Example
+## Current Usage
 
- * `./karat-sleuth`
- * `./karat-sleuth ../training/unknown`
- * `./karat-sleuth ../training/known {ham,spam}`
+ * `karat-sleuth`
+ * `karat-sleuth ../training/unknown`
+ * `karat-sleuth ../training/unknown {spam,ham}`
+
+
+## Future CLI Usage
+
+ * `karat-sleuth train [data-set|path] [ham|spam]`
+   * If a data-set name is passed (`easy`, `hard`, `unknown`) then the messages
+	 will be loaded from the default training directory
+   * If a file / directory path is specified it will learn from all messages
+	 specified in the path
+
+ * `karat-sleuth classify [data-set|path]`
+   * Can re-classify an entire data-set
+   * Can classify one or more messages from a specified path
+
+
+### `karat-sleuth train easy`
+
+This will train the classifier using the easy data set located in the default
+data directory
+
+
+### `karat-sleuth classify *.eml`
+
+Will classify all messages in the current working directory. Outputting a list of
+file names and spam/ham flags
 
 
 ## Results
