@@ -60,7 +60,7 @@ We use some other ruby gems (packages)
 ## Current Usage
 
  * `karat-sleuth`
- * `karat-sleuth ../training/unknown`
+ * `karat-sleuth ../training/known`
  * `karat-sleuth ../training/unknown {spam,ham}`
 
 
