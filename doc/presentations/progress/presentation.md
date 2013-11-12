@@ -8,11 +8,11 @@ what is and is not SPAM
 
 ## Implementation
 
-* Written in ruby as a gem with a simple command line interface
-* Uses rake to pull and normalize training and testing data
-* Takes advantage of the mail gem to parse messages
-* Uses bayesian filtering on subject and email contents
-* Allows for persisting data storage
+ * Written in ruby as a gem with a simple command line interface
+ * Uses rake tasks to pull and normalize training and testing data
+ * Takes advantage of the mail gem to parse messages
+ * Uses bayesian filtering on subject and email contents
+ * Allows for persisting data storage
 
 
 ## Example
