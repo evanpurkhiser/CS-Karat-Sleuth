@@ -15,6 +15,23 @@ what is and is not SPAM
  * Allows for persisting data storage
 
 
+### Useful Libraries
+
+We use some other ruby gems (packages)
+
+ * `mail`
+   Provides simple and efficent parsing and querying of raw email message
+   information
+
+ * `classifier`
+   Base-bone implementation of a Bayseian Classifier. We build on-top of this to
+   improve classification results
+
+ * `sequel`
+   Provides a extreamly flexible and ruby-centric API to different database
+   backends - Used for SQLite manipulation
+
+
 ## Example
 
  * `./karat-sleuth`
