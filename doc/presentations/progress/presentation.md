@@ -31,7 +31,7 @@ We use some other ruby gems (packages)
 
  * [`sequel`](https://github.com/jeremyevans/sequel)
 
-   Provides a extremely flexible and ruby-centric API to different database
+   Provides an extremely flexible and ruby-centric API to different database
    backends - Used for SQLite manipulation
 
 
