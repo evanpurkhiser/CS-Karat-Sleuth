@@ -35,6 +35,18 @@ We use some other ruby gems (packages)
    backends - Used for SQLite manipulation
 
 
+### Data Normalization
+
+`rake training:normalize`
+
+ * Downloads 10 different archives of spam / ham training data
+ * Ensures all messages are in the same raw message format
+ * Organizes spam/ham into 'difficulty' categories: Hard, Easy, Unknown -
+   Based on original data set organization
+ * Renames all email messages to {md5checksum}.eml
+ * `training_sets/{hard,easy,unknown}/{spam,ham}/*.eml`
+
+
 ## Example
 
  * `./karat-sleuth`
