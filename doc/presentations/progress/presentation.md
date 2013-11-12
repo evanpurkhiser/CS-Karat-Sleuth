@@ -21,7 +21,7 @@ We use some other ruby gems (packages)
 
  * [`mail`](https://github.com/mikel/mail)
 
-   Provides simple and efficent parsing and querying of raw email message
+   Provides simple and efficient parsing and querying of raw email message
    information
 
  * [`classifier`](https://github.com/cardmagic/classifier)
