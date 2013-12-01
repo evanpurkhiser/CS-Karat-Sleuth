@@ -62,6 +62,18 @@ module KaratSleuth::Storage
 			true
 		end
 
+		# Persist the current Bayesian categories into a clean database. This
+		# will clear all previous classifications from the persistant storage
+		# and save the current state of the classifier. This is different from
+		# the normal Bayes::persist method in that previous tallies are not
+		# preserved
+		def persist_fresh
+			@db_table.delete
+			persist
+
+			true
+		end
+
 		# Load the classifications back in from the KaratSleuth sequel database
 		def reload!
 			# Reinitalize the categories for this classifier instance
