@@ -47,5 +47,5 @@ module KaratSleuth::Storage
 	end
 
 	# Patch in the persistence methods to the Bayes Classifier
-	Classifier::Bayes.send(:include, Bayes)
+	Classifier::Bayes.send(:prepend, Bayes)
 end
