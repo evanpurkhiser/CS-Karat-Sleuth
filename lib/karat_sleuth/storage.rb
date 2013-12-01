@@ -37,12 +37,27 @@ module KaratSleuth::Storage
 		# database. This will increment the tally for words that already exist
 		# in the persistant storage
 		def persist
+			# Keep track of entries not on the database already to mass-insert
+			new_entries = []
+
 			# Insert and update entities for category/word tallies
 			@categories.each do |category, words|
 				words.each do |word, tally|
-					classes.insert :category => category.to_s, :word => word.to_s, :tally => tally
+					key = { :category => category.to_s, :word => word.to_s }
+					tally = tally.to_i
+
+					if @db_table.where(key).empty?
+						# Insert a new entry if not already entered into the database
+						new_entries << key.merge(:tally => tally)
+					else
+						# Increment the tally if the entry exists
+						@db_table.where(key).update(:tally => Sequel.expr(tally) + :tally)
+					end
 				end
 			end
+
+			# Insert all new entires into persistant storage
+			@db_table.multi_insert new_entries
 
 			true
 		end
