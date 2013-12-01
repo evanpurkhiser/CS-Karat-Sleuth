@@ -14,23 +14,30 @@ module KaratSleuth::Storage
 	# This will store classifications into the sequel database
 	module Bayes
 
-		# Save the current Bayesian categories into the KaratSleuth sequel
-		# database
-		def persist
+		# Setup the database table on initalization
+		def initialize(*categories)
 			db = KaratSleuth::Storage.db
 
 			# Ensure the classifications table exists. This will only create the
 			# table if it doesn't already exist
 			db.create_table? :classifications do
-				primary_key :id
-
 				String  :category
 				String  :word
 				Integer :tally
+
+				primary_key [:category, :word]
 			end
 
-			classes = db[:classifications]
+			@db_table = db[:classifications]
 
+			super
+		end
+
+		# Save the current Bayesian categories into the KaratSleuth sequel
+		# database. This will increment the tally for words that already exist
+		# in the persistant storage
+		def persist
+			# Insert and update entities for category/word tallies
 			@categories.each do |category, words|
 				words.each do |word, tally|
 					classes.insert :category => category.to_s, :word => word.to_s, :tally => tally
