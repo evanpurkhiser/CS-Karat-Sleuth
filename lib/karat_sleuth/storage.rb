@@ -64,7 +64,16 @@ module KaratSleuth::Storage
 
 		# Load the classifications back in from the KaratSleuth sequel database
 		def reload!
+			# Reinitalize the categories for this classifier instance
+			categories = @db_table.all.map { |entry| entry[:category] }.uniq
+			initialize *categories
 
+			# Collect all words and tallies
+			@db_table.each do |entry|
+				@categories[entry[:category].to_sym][entry[:word].to_sym] = entry[:tally]
+			end
+
+			true
 		end
 	end
 
