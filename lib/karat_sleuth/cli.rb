@@ -4,6 +4,53 @@ require 'mail'
 require 'classifier'
 
 class KaratSleuth::CLI
+	# Usage string
+	USAGE = <<-USAGE
+karat-slueth - A command line tool for classifying spam email
+
+Usage: karat-slueth COMMAND [options]
+
+The following commands and options are available
+
+train         Train the spam heuristics using a dataset of spam, ham, or both
+              email messages. This command accepts a optional path to a folder
+              containing a 'spam' and 'ham' folder. If these directories do not
+              exist then a second option mussed be passed specifying if the
+              email files in the given directories should be considered 'spam'
+              or 'ham'.
+
+              You may also sepcify a 'data-set' as the first option to this
+              command. This will look for a directory in the current working
+              directory named 'training' and then look for a folder with the
+              dataset name given as the parameter.
+
+              If no data-set is given and a 'training' folder exists then all
+              datasets will be used to train the filter.
+
+              karat-slueth train [data-set|path] [ham|spam]
+
+classify      Classify a set of email messages. This will list out the input
+              files with an identifier marking them as either 'ham' or 'spam.
+              You may specify a path to mesages, a data-set, or give not
+              additional parameters in which case it will classify all mesasges
+              in the 'training' folder.
+
+              The parameter behavior is inline with the 'train' command.
+
+              karat-slueth classify [data-set|path]
+
+reclassify    This will take a set of training data, train from it, and then
+              reclassify the same emails and print out statistics about the messages trained
+              on and how they were classified vs their actual values
+
+get-examples  Download example testing and training data into a 'training'
+              folder in the current working directory. This may be used with the
+              'train' command as it contains 3 datasets 'hard', 'easy', and a
+              'unknown' dataset. Some only contain ham while others also cotanin
+              spam messages
+
+help          This help message
+USAGE
 
 	def self.start(argv)
 		# Expected input for error messages
