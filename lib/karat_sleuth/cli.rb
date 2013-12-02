@@ -1,9 +1,10 @@
 require 'karat_sleuth'
 
-require 'mail'
-require 'classifier'
-
 class KaratSleuth::CLI
+
+	# Available commands
+	COMMANDS = %w(classify reclassify train get-examples help)
+
 	# Usage string
 	USAGE = <<-USAGE
 karat-slueth - A command line tool for classifying spam email
@@ -53,6 +54,56 @@ help          This help message
 USAGE
 
 	def self.start(argv)
+		cli = self.new argv
+
+		if argv.length < 1
+			puts "Please specify a command"
+			puts "Execute `karat-slueth help` for more information"
+			return 1
+		end
+
+		command = argv[0]
+
+		unless COMMANDS.include? command
+			puts "Invalid command: #{command}"
+			puts "Execute `karat-slueth help` to see a list of valid commands"
+			return 1
+		end
+
+		# Execute the command
+		return cli.send command.gsub('-', '_').to_sym
+	end
+
+	def initialize(argv)
+		@argv = argv
+	end
+
+	def train; end
+
+	def classify; end
+
+	def reclassify; end
+
+	def get_examples; end
+
+	# Output help / usage message
+	def help
+		puts USAGE
+	end
+
+
+
+
+
+
+
+
+
+
+	def old_code
+		require 'mail'
+		require 'classifier'
+
 		# Expected input for error messages
 		expectedArg = "Possible inputs:
 karat-sleuth
