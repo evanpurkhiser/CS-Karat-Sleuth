@@ -33,7 +33,11 @@ namespace :training do
 	# Normalization organizes email message into groups based on the
 	# 'difficulty' of the messages and based on weather the messages are known
 	# spam / ham.
-	task :normalize => :download do
+	task :normalize, [:directory] => :download do |t, args|
+
+		# Normalize training data in passed directory. If no directory passed then
+		# Use the Rakefile root directory
+		Dir.chdir args[:directory] if args[:directory]
 
 		# Spam assassin sets match a pattern when they are extracted. The extracted
 		# folder will be the name after the date of the archive file. The type of
