@@ -84,7 +84,15 @@ USAGE
 
 	def reclassify; end
 
-	def get_examples; end
+	# Execute the rake tasks to download example training / testing data
+	def get_examples;
+		pwd = Dir.pwd
+		Dir.chdir File.expand_path('../..', __dir__)
+
+		require 'rake'
+		Rake.load_rakefile 'Rakefile'
+		Rake::Task['training:normalize'].invoke(pwd)
+	end
 
 	# Output help / usage message
 	def help
