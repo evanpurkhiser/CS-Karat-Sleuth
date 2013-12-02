@@ -10,16 +10,16 @@ class KaratSleuth::CLI
 
 	# Usage string
 	USAGE = <<-USAGE
-karat-slueth - A command line tool for classifying spam email
+karat-sleuth - A command line tool for classifying spam email
 
-Usage: karat-slueth COMMAND [options]
+Usage: karat-sleuth COMMAND [options]
 
 The following commands and options are available
 
 train         Train the spam heuristics using a dataset of spam, ham, or both
-              email messages. This command accepts a optional path to a folder
+              email messages. This command accepts an optional path to a folder
               containing a 'spam' and 'ham' folder. If these directories do not
-              exist then a second option mussed be passed specifying if the
+              exist then a second option must be passed specifying if the
               email files in the given directories should be considered 'spam'
               or 'ham'.
 
@@ -31,27 +31,31 @@ train         Train the spam heuristics using a dataset of spam, ham, or both
               If no data-set is given and a 'training' folder exists then all
               datasets will be used to train the filter.
 
-              karat-slueth train [data-set|path] [ham|spam]
+              karat-sleuth train [data-set|path] [ham|spam]
 
 classify      Classify a set of email messages. This will list out the input
-              files with an identifier marking them as either 'ham' or 'spam.
-              You may specify a path to mesages, a data-set, or give not
+              files with an identifier marking them as either 'ham' or 'spam'.
+              You may specify a path to messages, a data-set, or give no
               additional parameters in which case it will classify all mesasges
               in the 'training' folder.
 
               The parameter behavior is inline with the 'train' command.
 
-              karat-slueth classify [data-set|path]
+              karat-sleuth classify [data-set|path]
 
 reclassify    This will take a set of training data, train from it, and then
               reclassify the same emails and print out statistics about the messages trained
-              on and how they were classified vs their actual values
+              on and how they were classified vs their actual values.
+
+              karat-sleuth reclassify [data-set|path]
 
 get-examples  Download example testing and training data into a 'training'
               folder in the current working directory. This may be used with the
-              'train' command as it contains 3 datasets 'hard', 'easy', and a
-              'unknown' dataset. Some only contain ham while others also cotanin
-              spam messages
+              'train' command as it contains 3 datasets 'hard', 'easy', and an
+              'unknown' dataset. Some only contain ham while others also contain
+              spam messages.
+
+              karat-sleuth get-examples
 
 help          This help message
 USAGE
@@ -62,7 +66,7 @@ USAGE
 	def self.start(argv)
 		if argv.length < 1
 			puts "Please specify a command"
-			puts "Execute `karat-slueth help` for more information"
+			puts "Execute `karat-sleuth help` for more information"
 			return 1
 		end
 
@@ -71,7 +75,7 @@ USAGE
 
 		unless COMMANDS.include? command
 			puts "Invalid command: #{command}"
-			puts "Execute `karat-slueth help` to see a list of valid commands"
+			puts "Execute `karat-sleuth help` to see a list of valid commands"
 			return 1
 		end
 
@@ -211,7 +215,7 @@ USAGE
 				.send(:&, ['spam', 'ham'])
 				.map(&:to_sym)
 
-			# Just return email paths if the directory has no spam or ham
+			# Just return email paths if the directory has neither spam nor ham
 			# directories
 			if target_dirs.empty?
 				result[:emails] = Dir.glob(File.join(item, '**/*'))
