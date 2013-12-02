@@ -78,27 +78,32 @@ USAGE
 		@argv = argv
 	end
 
-	def train; end
+	module Commands
 
-	def classify; end
+		def train; end
 
-	def reclassify; end
+		def classify; end
 
-	# Execute the rake tasks to download example training / testing data
-	def get_examples;
-		pwd = Dir.pwd
-		Dir.chdir File.expand_path('../..', __dir__)
+		def reclassify; end
 
-		require 'rake'
-		Rake.load_rakefile 'Rakefile'
-		Rake::Task['training:normalize'].invoke(pwd)
+		# Execute the rake tasks to download example training / testing data
+		def get_examples;
+			pwd = Dir.pwd
+			Dir.chdir File.expand_path('../..', __dir__)
+
+			require 'rake'
+			Rake.load_rakefile 'Rakefile'
+			Rake::Task['training:normalize'].invoke(pwd)
+		end
+
+		# Output help / usage message
+		def help
+			puts USAGE
+		end
+
 	end
 
-	# Output help / usage message
-	def help
-		puts USAGE
-	end
-
+	include Commands
 
 
 
