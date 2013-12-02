@@ -148,8 +148,12 @@ USAGE
 			return \
 			{
 				:target  => nil,
-				:grouped => false,
-				:emails  => Dir.glob(File.join(DEFAULT_DATA_DIR, '**/*')),
+				:grouped => true,
+				:emails  =>
+				{
+					:ham  => Dir.glob(File.join(DEFAULT_DATA_DIR, '**/ham/*')),
+					:spam => Dir.glob(File.join(DEFAULT_DATA_DIR, '**/spam/*')),
+				},
 			}
 		end
 
