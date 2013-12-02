@@ -53,6 +53,9 @@ get-examples  Download example testing and training data into a 'training'
 help          This help message
 USAGE
 
+	# Start the command line parser. This will accept a list of arguments and
+	# will execute a command based on the first argument. All other arguments
+	# will be passed to the CLI object
 	def self.start(argv)
 		cli = self.new argv
 
