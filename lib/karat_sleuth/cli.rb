@@ -304,7 +304,12 @@ USAGE
 			bayes.persist
 		end
 
-		def classify; end
+		# Use the classifier to group emails
+		def classify; 
+			require 'classifier'
+			require 'mail'
+			require 'colorize'
+		end
 
 		def reclassify; end
 
