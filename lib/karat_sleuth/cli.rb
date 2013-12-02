@@ -57,15 +57,14 @@ USAGE
 	# will execute a command based on the first argument. All other arguments
 	# will be passed to the CLI object
 	def self.start(argv)
-		cli = self.new argv
-
 		if argv.length < 1
 			puts "Please specify a command"
 			puts "Execute `karat-slueth help` for more information"
 			return 1
 		end
 
-		command = argv[0]
+		command = argv.shift
+		cli = self.new argv
 
 		unless COMMANDS.include? command
 			puts "Invalid command: #{command}"
