@@ -21,16 +21,16 @@ karat-sleuth <unclassified-dir> {spam,ham}"
 		end
 
 		# If given the directory, look for separated ham/spam folders with emails
-		haveHam = true
-		haveSpam = true
+		hamDir = "default"
+		spamDir = "default"
 		if ARGV.length >= 1
 			dataDir = ARGV[0]
 			hamDir = dataDir + "/ham"
 			spamDir = dataDir + "/spam"
 		end
 
-		haveHam = false unless File.directory? hamDir
-		haveSpam = false unless File.directory? spamDir
+		haveHam = File.directory? hamDir
+		haveSpam = File.directory? spamDir
 
 		# The directory could have either ham, spam, or both.
 		if !haveSpam && !haveHam
