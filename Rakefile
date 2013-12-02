@@ -17,17 +17,17 @@ namespace :training do
 		'20050311_spam_2.tar.bz2'     => 'http://spamassassin.apache.org/publiccorpus/20050311_spam_2.tar.bz2',
 	}
 
+	tmp = Dir.tmpdir
+
 	# Training data will be stored in the tmp directory. Prefix all names
-	download_tasks = Hash[training_data.map { |k, v| [File.join('tmp', k), v] }]
+	download_tasks = Hash[training_data.map { |k, v| [File.join(tmp, k), v] }]
 
 	# Task to download all defined spam sets
 	task :download => download_tasks.keys
 
-	directory 'tmp'
-
 	# Create download tasks for each file
 	download_tasks.each do |name, url|
-		file(name => 'tmp') { sh 'curl', '-o', name, url }
+		file(name) { sh 'curl', '-o', name, url }
 	end
 
 	# Normalization organizes email message into groups based on the
@@ -53,14 +53,14 @@ namespace :training do
 			difficulty = name[/easy|hard/] || 'unknown'
 
 			# Get the name of the folder that will be extracted
-			folder = File.join 'tmp', name.match(/[0-9]+_(.*)\.tar\.bz2/)[1]
+			folder = File.join tmp, name.match(/[0-9]+_(.*)\.tar\.bz2/)[1]
 
 			# Where to extract the email messages to
 			target  = File.join 'training', difficulty, type
-			tarball = File.join 'tmp', name
+			tarball = File.join tmp, name
 
 			# Extract the messages to the tmp directory
-			sh "tar -xf #{tarball} -C tmp"
+			sh "tar -xf #{tarball} -C #{tmp}"
 			mkdir_p target
 
 			Dir.glob File.join(folder, '*.*') do |filename|
@@ -80,9 +80,11 @@ namespace :training do
 		#
 		# Move each file into the correct directory for spam vs ham
 		begin
+			tarball = File.join tmp, 'CSDMC2010_SPAM.zip'
+
 			# Extract the contents of the file
-			sh "unzip -q -o tmp/CSDMC2010_SPAM.zip -d tmp"
-			folder = 'tmp/CSDMC2010_SPAM/CSDMC2010_SPAM'
+			sh "unzip -q -o #{tarball} -d #{tmp}"
+			folder = File.join tmp, 'CSDMC2010_SPAM', 'CSDMC2010_SPAM'
 
 			# Map the filename to the boolean value of if it is spam or not
 			spam_labels = File.readlines(File.join(folder, 'SPAMTrain.label'))
@@ -102,7 +104,7 @@ namespace :training do
 				mv filename, File.join('training/unknown', type, new_name)
 			end
 
-			rm_r 'tmp/CSDMC2010_SPAM'
+			rm_r File.join(tmp, 'CSDMC2010_SPAM')
 		end
 	end
 
