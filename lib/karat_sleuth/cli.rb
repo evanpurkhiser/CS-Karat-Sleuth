@@ -3,7 +3,7 @@ require 'karat_sleuth'
 class KaratSleuth::CLI
 
 	# Available commands
-	COMMANDS = %w(classify reclassify train get-examples help)
+	COMMANDS = %w[classify reclassify train get-examples help]
 
 	# The directory to look for data sets in by default
 	DEFAULT_DATA_DIR = 'training'
