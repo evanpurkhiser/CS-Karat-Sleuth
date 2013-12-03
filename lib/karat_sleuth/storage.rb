@@ -82,7 +82,7 @@ module KaratSleuth::Storage
 
 			# Collect all words and tallies
 			@db_table.each do |entry|
-				@categories[entry[:category].to_sym][entry[:word].to_sym] = entry[:tally]
+				@categories[entry[:category]][entry[:word]] = entry[:tally]
 			end
 
 			true
