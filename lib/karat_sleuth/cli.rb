@@ -332,7 +332,7 @@ USAGE
 					if mail.body.decoded
 						result = bayes.classify mail.body.decoded
 						output = "\r#{path}     #{type}     #{result}\n"
-						if type == result.downcase
+						if "#{type}" == result.downcase
 							print output.green
 						else
 							print output.red
