@@ -317,13 +317,12 @@ USAGE
 			# Don't do anything right now unless it's grouped
 			return if ! options[:grouped]
 
-			total     = 0
-			totalHam  = 0
-			totalSpam = 0
-			correctH  = 0
-			correctS  = 0
-			wrongH    = 0
-			wrongS    = 0
+			total_positive = 0 # Total number of ham messages
+			total_negative = 0 # Total number of spam messages
+			true_positive  = 0 # Number of correctly identified ham messages
+			true_negative  = 0 # Number of correctly identified spam messages
+			false_positive = 0 # Number of spam messages incorrectly identified as ham
+			false_negative = 0 # Number of ham messages incorrectly identified as spam
 
 			options[:emails].each do |type, emails|
 				emails.each do |path|
@@ -339,23 +338,32 @@ USAGE
 							print output.red
 						end
 
-						print "\n\r#{total}\e[1A\r\e[K#{"-"*(output.length - 2)}".light_white
-
-						if type == 'ham'
-							totalHam += 1
+						# Identify true and false positives (ham)
+						if "#{type}" == 'ham'
+							total_positive += 1
+							print "hit ham"
 							if result == 'Ham'
-								correctH += 1
+								true_positive += 1
+							else
+								false_positive += 1
 							end
-
 						end
 
-						if type == 'spam'
-							totalSpam += 1
+						# Identify true and false negatives (spam)
+						if "#{type}" == 'spam'
+							total_negative += 1
+							print "hit spam"
+							if result == 'Spam'
+								true_negative += 1
+							else
+								false_negative +=1
+							end
 						end
+
+						total = total_positive + total_negative
+						print "\n\r#{total}\e[1A\r\e[K#{"-"*(output.length - 2)}".light_white
+						
 					end
-
-					total += 1
-
 				end
 			end
 
