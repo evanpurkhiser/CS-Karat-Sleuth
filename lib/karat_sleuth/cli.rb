@@ -309,6 +309,11 @@ USAGE
 			require 'classifier'
 			require 'mail'
 			require 'colorize'
+
+			options = detect_emails
+			bayes   = Classifier::Bayes.new 'spam', 'ham'
+			bayes.reload!
+
 		end
 
 		def reclassify; end
