@@ -272,7 +272,7 @@ USAGE
 	module Commands
 
 		# Train the classifier from emails
-		def train;
+		def train
 			require 'classifier'
 			require 'mail'
 
@@ -282,13 +282,13 @@ USAGE
 			# Don't do anything right now unless it's grouped
 			return if ! options[:grouped]
 
-			total = 0;
+			total = 0
 
 			options[:emails].each do |type, emails|
 				emails.each do |path|
 					mail = Mail.read(path)
 
-					# Use contents of ham mail to add into knowledge base
+					# Use contents of email to add into knowledge base
 					if mail.subject
 						bayes.train type.to_s, mail.subject
 					end
@@ -305,7 +305,7 @@ USAGE
 		end
 
 		# Use the classifier to group emails
-		def classify; 
+		def classify
 			require 'classifier'
 			require 'mail'
 			require 'colorize'
@@ -314,12 +314,30 @@ USAGE
 			bayes   = Classifier::Bayes.new 'spam', 'ham'
 			bayes.reload!
 
+			total = 0
+
+			options[:emails].each do |type, emails|
+				emails.each do |path|
+					mail = Mail.read(path)
+
+					# Use contents of email to classify message
+					if mail.body.decoded
+						result = bayes.classify mail.body.decoded
+						puts "#{path} \t#{type} \t#{result}\n"
+					end
+
+					#print "\r#{total += 1}"
+					#STDOUT.flush
+
+				end
+			end
+
 		end
 
 		def reclassify; end
 
 		# Execute the rake tasks to download example training / testing data
-		def get_examples;
+		def get_examples
 			pwd = Dir.pwd
 			Dir.chdir File.expand_path('../..', __dir__)
 
