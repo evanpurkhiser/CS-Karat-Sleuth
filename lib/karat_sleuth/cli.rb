@@ -367,7 +367,14 @@ USAGE
 				end
 			end
 
-			# Pretty print total results
+			# Pretty print total results in a confusion matrix
+			puts "\n\n\nActual vs. Predicted\n".light_cyan
+			format = "%6s\t%6s\t%6s\n".light_cyan
+			printf(format, " ", "Ham", "Spam")
+			printf(format, "     .", "------", "------")
+			printf(format, "Ham  |", "#{true_positive}", "#{false_positive}")
+			printf(format, "Spam |", "#{false_negative}", "#{true_negative}")
+			puts "\n"
 		end
 
 		def reclassify; end
