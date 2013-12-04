@@ -305,7 +305,9 @@ USAGE
 		end
 
 		# Use the classifier to group emails
-		def classify
+		def classify; end
+
+		def reclassify
 			require 'classifier'
 			require 'mail'
 			require 'colorize'
@@ -368,7 +370,7 @@ USAGE
 			end
 
 			# Pretty print total results in a confusion matrix
-			puts "\n\n\nActual vs. Predicted\n".light_cyan
+			puts "\n\n\nE-mail Confusion Matrix\n".light_cyan
 			format = "%6s\t%6s\t%6s\n".light_cyan
 			printf(format, " ", "Ham", "Spam")
 			printf(format, "     .", "------", "------")
@@ -376,8 +378,6 @@ USAGE
 			printf(format, "Spam |", "#{false_negative}", "#{true_negative}")
 			puts "\n"
 		end
-
-		def reclassify; end
 
 		# Execute the rake tasks to download example training / testing data
 		def get_examples
