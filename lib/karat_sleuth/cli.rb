@@ -317,19 +317,40 @@ USAGE
 			# Don't do anything right now unless it's grouped
 			return if ! options[:grouped]
 
-			total = 0
+			total     = 0
+			totalHam  = 0
+			totalSpam = 0
+			correctH  = 0
+			correctS  = 0
+			wrongH    = 0
+			wrongS    = 0
 
 			options[:emails].each do |type, emails|
 				emails.each do |path|
 					mail = Mail.read(path)
 
-					# Use contents of email to classify message
+					# Use contents of email to classify message and print accuracy
 					if mail.body.decoded
 						result = bayes.classify mail.body.decoded
+						output = "\r#{path}     #{type}     #{result}\n"
 						if type == result.downcase
-							puts "#{path} \t#{type} \t#{result}".green
+							print output.green
 						else
-							puts "#{path} \t#{type} \t#{result}".red
+							print output.red
+						end
+
+						print "\n\r#{total}\e[1A\r\e[K#{"-"*(output.length - 2)}".light_white
+
+						if type == 'ham'
+							totalHam += 1
+							if result == 'Ham'
+								correctH += 1
+							end
+
+						end
+
+						if type == 'spam'
+							totalSpam += 1
 						end
 					end
 
