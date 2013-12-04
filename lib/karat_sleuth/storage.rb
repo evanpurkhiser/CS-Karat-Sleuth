@@ -82,7 +82,12 @@ module KaratSleuth::Storage
 
 			# Collect all words and tallies
 			@db_table.each do |entry|
-				@categories[entry[:category].to_sym][entry[:word]] = entry[:tally]
+				# Skip errors converting strange UTF8 words to symbols
+				begin
+					@categories[entry[:category].to_sym][entry[:word].to_sym] = entry[:tally]
+				rescue
+					next
+				end
 			end
 
 			true
