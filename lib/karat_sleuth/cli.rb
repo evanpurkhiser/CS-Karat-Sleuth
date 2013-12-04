@@ -314,6 +314,9 @@ USAGE
 			bayes   = Classifier::Bayes.new 'spam', 'ham'
 			bayes.reload!
 
+			# Don't do anything right now unless it's grouped
+			return if ! options[:grouped]
+
 			total = 0
 
 			options[:emails].each do |type, emails|
@@ -323,15 +326,19 @@ USAGE
 					# Use contents of email to classify message
 					if mail.body.decoded
 						result = bayes.classify mail.body.decoded
-						puts "#{path} \t#{type} \t#{result}\n"
+						if type == result.downcase
+							puts "#{path} \t#{type} \t#{result}".green
+						else
+							puts "#{path} \t#{type} \t#{result}".red
+						end
 					end
 
-					#print "\r#{total += 1}"
-					#STDOUT.flush
+					total += 1
 
 				end
 			end
 
+			# Pretty print total results
 		end
 
 		def reclassify; end
