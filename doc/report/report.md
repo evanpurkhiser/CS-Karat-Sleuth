@@ -2,4 +2,16 @@
 
 Evan Purkhiser, Heather Michaud, Tim Mott
 
-Yep. This is a report
+## Introduction
+
+## Karat-Sleuth
+
+### Design
+
+### Implementation
+
+## Evaluation
+
+## Contribution
+
+## Conclusion
