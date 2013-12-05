@@ -30,7 +30,7 @@ We use some other ruby gems (packages)
  * [`classifier`](https://github.com/cardmagic/classifier)
 
    Bare-bone implementation of a Bayesian Classifier. We extended the functionality
-   to improve classification results.
+   to improve classification efficiency.
 
 
  * [`sequel`](https://github.com/jeremyevans/sequel)
