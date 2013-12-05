@@ -123,4 +123,14 @@ We use some other ruby gems (packages)
 | Spam | 95 (1.8%)    | 5238 (98.2%) |
 
 
+## Result Evaluation
+
+ * Varying levels of accuracy depending on distribution of training data
+ * Tool designed to be non-interfering
+   - Greater accuracy for ham → less false positives 
+ * Threats to validity
+   - inconsistent ham messages from corpus
+   - improved results from user-specific data
+
+
 ## ... Demo Results
