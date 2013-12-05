@@ -86,4 +86,16 @@ We use some other ruby gems (packages)
  * Confusion matrix compares actual vs. predicted types
 
 
+## Obtained Results
+
+
+### 50/50 Spam-Ham set
+
+|      | Ham          | Spam         |
+| ---- | ------------ | ------------ |
+| Ham  | 4996 (99.9%) | 1 (0.1%)     |
+| Spam | 2489 (46.7%) | 2844 (53.3%) |
+
+
+
 ## ... Demo Results
