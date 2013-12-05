@@ -11,9 +11,9 @@ module KaratSleuth
 
 	# Convert a email file into a message object
 	def self.path_to_message(path)
-		$stderr.reopen '/dev/null', 'w'
+#		$stderr.reopen '/dev/null', 'w'
 		message = Mail.read(path)
-		$stderr = STDERR
+#		$stderr = STDERR
 
 		message
 	end
@@ -43,19 +43,19 @@ module KaratSleuth
 
 		# Determine the classification of this message
 		def classify
-			:ham
+			Classifier.classify self
 		end
 
 		# Test if a given message is classified has ham
 		def is_ham?
-			true
+			classify == :ham
 		end
 
 		# Test if a given message is classified as spam
 		def is_spam?
-			false
+			classify == :spam
 		end
 	end
 
-	Mail.send(:include, MailClassifiers)
+	Mail::Message.send(:include, MailClassifiers)
 end

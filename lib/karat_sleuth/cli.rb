@@ -1,4 +1,5 @@
 require 'karat_sleuth'
+require 'colorize'
 
 class KaratSleuth::CLI
 
@@ -294,16 +295,8 @@ USAGE
 		end
 
 		# Use the classifier to group emails
-		def classify; end
-
-		def stats
-			require 'classifier'
-			require 'mail'
-			require 'colorize'
-
+		def stats; end
 			options = detect_emails
-			bayes   = Classifier::Bayes.new 'spam', 'ham'
-			bayes.reload!
 
 			# Don't do anything right now unless it's grouped
 			return if ! options[:grouped]
@@ -320,12 +313,10 @@ USAGE
 
 			options[:emails].each do |type, emails|
 				emails.each do |path|
-					mail = Mail.read(path)
+					result = KaratSleuth.path_to_message(path).classify
 
 					# Use contents of email to classify message and print accuracy
-					if mail.body.decoded
-						result = bayes.classify mail.body.decoded
-						output = "\r#{path}     #{type}     #{result}\n"
+						output = "\r #{path}     #{type}     #{result}\n"
 						if "#{type}" == result.downcase
 							print output.green
 						else
@@ -355,8 +346,6 @@ USAGE
 						total_so_far = total_positive + total_negative
 						print "\n\rEmails Classified: #{total_so_far}/#{total}" \
 						      "\e[1A\r\e[K#{"-"*(output.length - 2)}".light_white
-						
-					end
 				end
 			end
 
