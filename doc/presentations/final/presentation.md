@@ -44,7 +44,10 @@ We use some other ruby gems (packages)
    classification statistics
 
 
-## CLI Usage : Data Normalization
+# CLI Tool
+
+
+## Data Normalization
 
  * `karat-sleuth get-examples`
    - Downloads 10 different archives of spam / ham training data
@@ -56,7 +59,7 @@ We use some other ruby gems (packages)
    - `training_sets/{hard,easy,unknown}/{spam,ham}/*.eml`
 
 
-## CLI Usage : Training
+## Training
 
  * `karat-sleuth train [data-set|path] [ham|spam]`
    - If a data-set name is passed (`easy`, `hard`, `unknown`) then the messages
@@ -66,7 +69,7 @@ We use some other ruby gems (packages)
    - Persists the classifier data
 
 
-## CLI Usage : Testing
+## Testing
 
  * `karat-sleuth stats [data-set|path]`
    - If a file / directory path is specified it will classify  all messages
@@ -75,7 +78,7 @@ We use some other ruby gems (packages)
    - Accuracy per message, total accuracy, and confusion matrix
 
 
-### Instrumentation Output
+## Instrumentation Output
 
  * Progress bar to indicate advancement through groups of categorized messages
  * Classified correctly → Message marked in green
