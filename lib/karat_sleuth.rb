@@ -11,12 +11,20 @@ module KaratSleuth
 
 	# Convert a email file into a message object
 	def self.path_to_message(path)
-		Mail.read(path)
+		$stderr.reopen '/dev/null', 'w'
+		message = Mail.read(path)
+		$stderr = STDERR
+
+		message
 	end
 
 	# Convert a string to a message object
 	def self.string_to_message(string)
-		Mail.read_from_string(string)
+		$stderr.reopen '/dev/null', 'w'
+		message = Mail.read_from_string(string)
+		$stderr = STDERR
+
+		message
 	end
 
 	# Learn from a message
