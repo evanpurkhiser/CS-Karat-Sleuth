@@ -1,5 +1,6 @@
 require "karat_sleuth/version"
 require "karat_sleuth/storage"
+require "karat_sleuth/classifier"
 
 require 'mail'
 
@@ -9,24 +10,23 @@ module KaratSleuth
 	CLASSIFICATIONS = [:ham, :spam]
 
 	# Convert a email file into a message object
-	def path_to_message(path)
+	def self.path_to_message(path)
 		Mail.read(path)
 	end
 
 	# Convert a string to a message object
-	def string_to_message(string)
+	def self.string_to_message(string)
 		Mail.read_from_string(string)
 	end
 
 	# Learn from a message
-	def train_from_message(message, classification)
+	def self.train_from_message(message, classification)
 		raise "Invalid message classification" unless CLASSIFICATIONS.include? classification
-
-		# Do 'something' to train the classifier from this message
+		Classifier.train message, classification
 	end
 
 	# Classify a message
-	def classify_message(message)
+	def self.classify_message(message)
 		message.classify
 	end
 

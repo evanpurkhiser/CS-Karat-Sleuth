@@ -273,28 +273,17 @@ USAGE
 
 		# Train the classifier from emails
 		def train
-			require 'classifier'
-			require 'mail'
-
 			options = detect_emails
-			bayes   = Classifier::Bayes.new 'spam', 'ham'
 
 			# Don't do anything right now unless it's grouped
-			return if ! options[:grouped]
+			raise "No message type(s) specified"  if ! options[:grouped]
 
 			total = 0
 
 			options[:emails].each do |type, emails|
 				emails.each do |path|
-					mail = Mail.read(path)
-
-					# Use contents of email to add into knowledge base
-					if mail.subject
-						bayes.train type.to_s, mail.subject
-					end
-					if mail.body.decoded
-						bayes.train type.to_s, mail.body.decoded
-					end
+					message = KaratSleuth.path_to_message path
+					KaratSleuth.train_from_message message, type
 
 					print "\r#{total += 1}"
 					STDOUT.flush
