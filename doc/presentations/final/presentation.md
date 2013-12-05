@@ -88,6 +88,16 @@ We use some other ruby gems (packages)
 
 ## Obtained Results
 
+ * 50/50 data set (10,000 messages)
+   - 5,000 Spam
+   - 5,000 Ham
+ * 80/20 data set (6,666 messages)
+   - 5,333 Spam
+   - 1,333 Ham
+ * 90/10 data set (6,666 messages)
+   - 5,333 Spam
+   - 468 Ham
+
 
 ### 50/50 Spam-Ham set
 
