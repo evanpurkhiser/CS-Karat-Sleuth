@@ -86,7 +86,7 @@ We use some other ruby gems (packages)
  * Confusion matrix compares actual vs. predicted types
 
 
-## Obtained Results
+### Size of Testing Data
 
  * 50/50 data set (10,000 messages)
    - 5,000 Spam
@@ -97,6 +97,9 @@ We use some other ruby gems (packages)
  * 90/10 data set (6,666 messages)
    - 5,333 Spam
    - 468 Ham
+
+
+## Obtained Results
 
 
 ### 50/50 Spam-Ham set
