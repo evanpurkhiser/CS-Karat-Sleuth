@@ -365,7 +365,7 @@ USAGE
 
 						total_so_far = total_positive + total_negative
 						print "\n\rEmails Classified: #{total_so_far}/#{total}" \
-						      "\e[1A\r\e[K#{"-"*(output.length - 2)}".light_white
+						      "\e[1A\r\e[K#{"-"*(output.length - 2)}".black
 						
 					end
 				end
