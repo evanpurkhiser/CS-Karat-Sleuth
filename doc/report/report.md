@@ -26,16 +26,25 @@ performs bayesian filtering on the email subject and body content.
 <!-- What's been accomplished -->
 ## Results
 
+Mail data sets were acquired from the Spam Assassin set and the CSDMC2010 SPAM corpus. The messages
+were organized into three categories of varying ham and spam distribution in order to compare
+the accuracy of the spam filter tool based on the spread of messages. 
+
+The first data set contained a total of 10,000 messages with 50% (5,000) spam and 50% (5,000) ham. 
+The next set included a total of 6,333 messages with 80% (5,333) spam and 20% (1,333) ham. The final data 
+set incorporated a sum of 5,801 messages with 90% (5,333) spam and 10% (468) ham. The resulting
+confusion matrices displaying the actual classification versus the predicted classification are
+shown in figures 1-3. 
 
 
-### 50/50 Spam-Ham set
+### Fig. 1. 50/50 Spam-Ham Confusion Matrix
 
 |      | Ham          | Spam         |
 | ---- | ------------ | ------------ |
 | Ham  | 4496 (99.9%) | 4 (0.1%)     |
 | Spam | 1988 (39.8%) | 3012 (60.2%) |
 
-### 80/20 Spam-Ham set
+### Fig. 2. 80/20 Spam-Ham Confusion Matrix
 
 |      | Ham          | Spam         |
 | ---- | ------------ | ------------ |
@@ -43,7 +52,7 @@ performs bayesian filtering on the email subject and body content.
 | Spam | 2489 (46.7%) | 2844 (53.3%) |
 
 
-### 90/10 Spam-Ham set
+### Fig. 3. 90/10 Spam-Ham Confusion Matrix
 
 |      | Ham          | Spam         |
 | ---- | ------------ | ------------ |
