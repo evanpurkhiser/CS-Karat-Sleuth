@@ -346,7 +346,7 @@ USAGE
 						# Identify true and false positives (ham)
 						if "#{type}" == 'ham'
 							total_positive += 1
-							if result == 'Ham'
+							if "#{result}" == 'Ham'
 								true_positive += 1
 							else
 								false_positive += 1
@@ -356,7 +356,7 @@ USAGE
 						# Identify true and false negatives (spam)
 						if "#{type}" == 'spam'
 							total_negative += 1
-							if result == 'Spam'
+							if "#{result}" == 'Spam'
 								true_negative += 1
 							else
 								false_negative +=1
@@ -378,17 +378,17 @@ USAGE
 			perc_true_neg  = 0
 			perc_true_pos  = 0
 			if total_positive != 0
-				perc_false_pos = (false_positive / total_positive) * 100
-				perc_true_pos  = (true_positive / total_positive) * 100
+				perc_false_pos = "%0.1f" % (false_positive.fdiv(total_positive) * 100)
+				perc_true_pos  = "%0.1f" % (true_positive.fdiv(total_positive) * 100)
 			end
 			if total_negative != 0
-				perc_true_neg  = (true_negative / total_negative) * 100
-				perc_false_neg = (false_negative / total_negative) * 100
+				perc_true_neg  = "%0.1f" % (true_negative.fdiv(total_negative) * 100)
+				perc_false_neg = "%0.1f" % (false_negative.fdiv(total_negative) * 100)
 			end
 
 			# Pretty print total results in a confusion matrix
 			puts "\n\n\n\t\t E-mail Confusion Matrix\n".light_cyan
-			format = "%15s\t%15s\t%15s\n".light_cyan
+			format = "%15s\t%30s\t%30s\n".light_cyan
 			printf(format, " ", "Ham     ", "Spam    ")
 			printf(format, "     .", "---------------", "---------------")
 			printf(format, "Ham  |", "#{true_positive} (#{perc_true_pos}%)", "#{false_positive} (#{perc_false_pos}%)")
