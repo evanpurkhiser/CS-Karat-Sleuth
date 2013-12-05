@@ -2,16 +2,20 @@
 
 Evan Purkhiser, Heather Michaud, Tim Mott
 
+<!-- Motivation and objects of the project -->
 ## Introduction
 
-## Karat-Sleuth
+<!-- Basic idea of methods or structures proposed to develop the project -->
+## Approach
 
-### Design
+<!-- What's been tried and implemented -->
+## Design and Implementation
 
-### Implementation
+<!-- What's been accomplished -->
+## Results
 
-## Evaluation
+<!-- What's been learned and what's the next step -->
+## Conclusion & Future Work
 
-## Contribution
-
-## Conclusion
+<!-- Team members and their contribution to the project -->
+## Remarks
