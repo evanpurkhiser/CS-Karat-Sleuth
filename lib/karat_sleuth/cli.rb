@@ -326,6 +326,9 @@ USAGE
 			false_positive = 0 # Number of spam messages incorrectly identified as ham
 			false_negative = 0 # Number of ham messages incorrectly identified as spam
 
+			# Total number of all messages to be classified
+			total = options[:emails].values.map(&:length).inject(:+)
+
 			options[:emails].each do |type, emails|
 				emails.each do |path|
 					mail = Mail.read(path)
@@ -343,7 +346,6 @@ USAGE
 						# Identify true and false positives (ham)
 						if "#{type}" == 'ham'
 							total_positive += 1
-							print "hit ham"
 							if result == 'Ham'
 								true_positive += 1
 							else
@@ -354,7 +356,6 @@ USAGE
 						# Identify true and false negatives (spam)
 						if "#{type}" == 'spam'
 							total_negative += 1
-							print "hit spam"
 							if result == 'Spam'
 								true_negative += 1
 							else
@@ -362,14 +363,16 @@ USAGE
 							end
 						end
 
-						total = total_positive + total_negative
-						print "\n\r#{total}\e[1A\r\e[K#{"-"*(output.length - 2)}".light_white
+						total_so_far = total_positive + total_negative
+						print "\n\rEmails Classified: #{total_so_far}/#{total}" \
+						      "\e[1A\r\e[K#{"-"*(output.length - 2)}".light_white
 						
 					end
 				end
 			end
 
-			# Percentages for true/false positive/negatives
+			# Calculate prcentages for true/false positive/negatives, watch out
+			# for that nasty-ol' divide by zero!
 			perc_false_pos = 0
 			perc_false_neg = 0
 			perc_true_neg  = 0
