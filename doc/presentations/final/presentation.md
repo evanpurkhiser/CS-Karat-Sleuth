@@ -17,6 +17,31 @@ what is and is not SPAM
  * Bayesian category-word-tally triplets are stored in SQLite
 
 
+### Useful Libraries
+
+We use some other ruby gems (packages)
+
+ * [`mail`](https://github.com/mikel/mail)
+
+   Provides simple and efficient parsing and querying of raw email message
+   information.
+
+ * [`classifier`](https://github.com/cardmagic/classifier)
+
+   Base-bone implementation of a Bayesian Classifier. We build on-top of this to
+   improve classification results.
+
+ * [`sequel`](https://github.com/jeremyevans/sequel)
+
+   Provides an extremely flexible and ruby-centric API to different database
+   backends - Used for SQLite manipulation.
+
+ * [`colorize`](https://github.com/fazibear/colorize)
+
+   Allows for terminal colors to accentuate accuracy and view classification
+   statistics aesthetically
+
+
 ### Data Normalization
 
 `rake training:normalize`
