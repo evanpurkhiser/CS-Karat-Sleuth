@@ -38,8 +38,8 @@ We use some other ruby gems (packages)
 
  * [`colorize`](https://github.com/fazibear/colorize)
 
-   Allows for terminal colors to accentuate accuracy and view classification
-   statistics aesthetically
+   Allows for terminal colors to accentuate results and aesthetically view
+   classification statistics
 
 
 ### Data Normalization
@@ -64,9 +64,18 @@ We use some other ruby gems (packages)
    - Persists the classifier data
 
  * `karat-sleuth reclassify [data-set|path]`
-   - Can classify one or more messages from a specified path
+   - If a file / directory path is specified it will classify  all messages
+    specified in the path or default to data directory
    - Prints out statistics regarding testing data
    - Accuracy per message, total accuracy, and confusion matrix
+
+
+### Result Instrumentation
+
+ * Progress bar to indicate advancement through groups of categorized messages
+ * Classified correctly ==> Message marked in green
+ * Classified inncorrectly ==> Message marked in red
+ * Confusion matrix compares actual vs. predicted types
 
 
 ## ... Demo Results
