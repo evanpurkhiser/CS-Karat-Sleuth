@@ -9,12 +9,13 @@ what is and is not SPAM
 ## Kick off Demo ...
 
 
-## Implementation
+## Design & Implementation
 
  * Written as a ruby gem with an intuitive command line interface and library
- * Rake tasks to download and normalize training/testing data
+ * Download and normalize various training/testing data
  * Bayesian filtering/training performed on email subject and body
  * Bayesian category-word-tally triplets are stored in SQLite
+ * Stop words are removed and words are converted to their stem form
 
 
 ### Useful Libraries
@@ -23,13 +24,14 @@ We use some other ruby gems (packages)
 
  * [`mail`](https://github.com/mikel/mail)
 
-   Provides simple and efficient parsing and querying of raw email message
+   Provides straightforward and efficient parsing and querying of raw email message
    information.
 
  * [`classifier`](https://github.com/cardmagic/classifier)
 
-   Base-bone implementation of a Bayesian Classifier. We build on-top of this to
-   improve classification results.
+   Bare-bone implementation of a Bayesian Classifier. We extended the functionality
+   to improve classification results.
+
 
  * [`sequel`](https://github.com/jeremyevans/sequel)
 
@@ -42,19 +44,19 @@ We use some other ruby gems (packages)
    classification statistics
 
 
-### Data Normalization
+## CLI Usage : Data Normalization
 
-`rake training:normalize`
+ * `karat-sleuth get-examples`
+   - Downloads 10 different archives of spam / ham training data
+   - Ensures all messages are in the same raw message format
+   - Organizes spam/ham into 'difficulty' categories: 
+      * Hard, Easy, Unknown
+      * Based on original data set organization
+   - Renames all email messages to {md5checksum}.eml
+   - `training_sets/{hard,easy,unknown}/{spam,ham}/*.eml`
 
- * Downloads 10 different archives of spam / ham training data
- * Ensures all messages are in the same raw message format
- * Organizes spam/ham into 'difficulty' categories: Hard, Easy, Unknown -
-   Based on original data set organization
- * Renames all email messages to {md5checksum}.eml
- * `training_sets/{hard,easy,unknown}/{spam,ham}/*.eml`
 
-
-## CLI Usage
+## CLI Usage : Training
 
  * `karat-sleuth train [data-set|path] [ham|spam]`
    - If a data-set name is passed (`easy`, `hard`, `unknown`) then the messages
@@ -63,18 +65,21 @@ We use some other ruby gems (packages)
     specified in the path
    - Persists the classifier data
 
- * `karat-sleuth reclassify [data-set|path]`
+
+## CLI Usage : Testing
+
+ * `karat-sleuth stats [data-set|path]`
    - If a file / directory path is specified it will classify  all messages
     specified in the path or default to data directory
    - Prints out statistics regarding testing data
    - Accuracy per message, total accuracy, and confusion matrix
 
 
-### Result Instrumentation
+### Instrumentation Output
 
  * Progress bar to indicate advancement through groups of categorized messages
- * Classified correctly ==> Message marked in green
- * Classified inncorrectly ==> Message marked in red
+ * Classified correctly → Message marked in green
+ * Classified inncorrectly → Message marked in red
  * Confusion matrix compares actual vs. predicted types
 
 

@@ -3,7 +3,7 @@ require 'karat_sleuth'
 class KaratSleuth::CLI
 
 	# Available commands
-	COMMANDS = %w[classify reclassify train get-examples help]
+	COMMANDS = %w[classify stats train get-examples help]
 
 	# The directory to look for data sets in by default
 	DEFAULT_DATA_DIR = 'training'
@@ -43,11 +43,11 @@ classify      Classify a set of email messages. This will list out the input
 
               karat-sleuth classify [data-set|path]
 
-reclassify    This will take a set of training data, train from it, and then
+stats         This will take a set of training data, train from it, and then
               reclassify the same emails and print out statistics about the messages trained
               on and how they were classified vs their actual values.
 
-              karat-sleuth reclassify [data-set|path]
+              karat-sleuth stats [data-set|path]
 
 get-examples  Download example testing and training data into a 'training'
               folder in the current working directory. This may be used with the
@@ -307,7 +307,7 @@ USAGE
 		# Use the classifier to group emails
 		def classify; end
 
-		def reclassify
+		def stats
 			require 'classifier'
 			require 'mail'
 			require 'colorize'
