@@ -6,6 +6,9 @@ A SPAM Email detection tool that uses various heuristics and continually learns
 what is and is not SPAM
 
 
+## Kick off Demo ...
+
+
 ## Implementation
 
  * Written as a ruby gem with an intuitive command line interface and library
@@ -39,4 +42,6 @@ what is and is not SPAM
    - Can classify one or more messages from a specified path
    - Prints out statistics regarding testing data
    - Accuracy per message, total accuracy, and confusion matrix
- 
+
+
+## ... Demo Results
