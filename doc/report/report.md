@@ -8,7 +8,8 @@ Evan Purkhiser, Heather Michaud, Tim Mott
 Spam has no clear definition, though an email message is considered suspicious if it is from 
 an unknown sender, sent in bulk, or simply unwanted. Spam messages are the junk mail and
 Jehovah Witness door-hangups of the internet world. On the contrary, ham messages are emails
-that are simply not spam.
+that are simply not spam. Ham messages are emails that the user would find important, desired,
+or personal.
 
 <!-- Basic idea of methods or structures proposed to develop the project -->
 ## Approach
@@ -21,7 +22,10 @@ tool which uses various heuristics and can continually learn what is and what is
 ## Design and Implementation
 
 Karat Sleuth is written as a ruby gem with an intuitive command line interface and library. It
-performs bayesian filtering on the email subject and body content. 
+performs bayesian filtering on the email subject and body content. Commands for the tool include
+downloading and normalizing testing and training data (`get-examples`), training with a given 
+data set or updating the classifier with a specified path (`train`), or providing statistics
+regarding accuracy of the tool given testing data (`stats`).
 
 <!-- What's been accomplished -->
 ## Results
