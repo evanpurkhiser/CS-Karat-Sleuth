@@ -37,6 +37,9 @@ $endif$
 \usepackage{setspace}
 \onehalfspacing
 
+% Times New Roman font
+\usepackage{times}
+
 % use microtype if available
 \IfFileExists{microtype.sty}{\usepackage{microtype}}{}
 $if(geometry)$
