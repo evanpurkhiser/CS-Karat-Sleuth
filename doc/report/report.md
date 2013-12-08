@@ -133,12 +133,29 @@ We've also extended this to persist the classification information into a SQLite
 database file that will be stored on disk. We can then reload this file on
 subsequent reloads of the library into memory.
 
-Karat Sleuth is written as a ruby gem with an intuitive command line interface
-and library. It performs bayesian filtering on the email subject and body
-content. Commands for the tool include downloading and normalizing testing and
-training data (`get-examples`), training with a given data set or updating the
-classifier with a specified path (`train`), or providing statistics regarding
-accuracy of the tool given testing data (`stats`).
+### Command Line Tool Design
+
+Since we were developing a library, it's important that we also designed a
+application that would use our library for a reference implementation. We
+decided that the best way to do this would be to develop a command line tool and
+to bundle it with the gem itself. The goal of this tool was to expose all of the
+libraries functionality through a CLI interface.
+
+The primary commands the tool supports are as follows
+
+ * `get-examples` - Allows the user to download example training data used to
+   test the library.
+
+ * `train` - Allows the user to train the tool from one or many email messages.
+
+ * `classify` - Classifies a given email message as either ham or spam.
+
+ * `stats` - Classifies a set of messages and outputs statistics about the
+   classifications. This can only be used when the types of each message is known.
+
+For the purpose of our project we primarily focused on the ability of the CLI
+tool to train from messages and to classify messages and print out statistics
+about the classifications (using the `stats` command).
 
 <!-- What's been accomplished -->
 ## Results
