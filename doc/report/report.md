@@ -33,22 +33,23 @@ this library through a straight forward and intuitive command line interface
 allowing the user to access all of the functionality of the library.
 
 We decided to use the ruby scripting language due to it's extremely expansive
-standard library and it's intuitive ye powerful syntax. This would allow us to
+standard library and it's intuitive yet powerful syntax. This would allow us to
 rapidly prototype the tool and leave room for performance improvements after we
 had a working implementation, the ruby language allows for just this. Although
 only one of the three team members had any extensive experience with ruby, it
-was decided that it would be fun and interesting for the lest of the team to
+was decided that it would be fun and interesting for the rest of the team to
 pick up.
 
 Because we are using the Ruby scripting language, the most obvious choice for
-creating a library that other developers may use is to create a "Ruby gem". Gems
-are a collection of ruby scripts that include meta-data about the library and
-logic to load scripts into other applications. Creating a ruby gem gives us the
-added bonus that it becomes quite straight forward to add dependencies on other
-libraries to our own. This gives us the option to leverage other well supported
-open source libraries and stop re-inventing the wheel.
+creating a library that other developers may use is to create a "Ruby gem".
+Gems are a collection of ruby scripts that include meta-data about the library
+and logic to load the scripts into other applications. Creating a ruby gem
+gives us the added bonus that it becomes quite straight forward to add
+dependencies on other libraries to our own. This gives us the option to
+leverage other well supported open source libraries and stop re-inventing the
+wheel.
 
-After some instal considerations on how we would like to classify messages we
+After some initial considerations on how we would like to classify messages we
 defined heuristics we hoped to use to classify messages:
 
  * **Bayesian Classifier**\
@@ -207,7 +208,7 @@ in the data set were correctly identified as spam.
 Ultimately, we learned how to implement an incrementally learning system that
 can continuously improve its classification results. During our implementation,
 we were educated on the specifics of the ruby language as well as Bayesian
-filtering calculations. A naive Bayes classifier takes a bags of words that have
+filtering calculations. A naive Bayes classifier takes a bag of words that have
 been classified into a specific category, then separates and organizes the
 unique words into a database containing the frequency that each word has
 appeared in each category. From this collection, any new bag of words can be
