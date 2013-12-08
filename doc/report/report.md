@@ -97,8 +97,6 @@ tasks. For example, before initial implementation we found that we could use the
 ruby [classifier gem](https://github.com/cardmagic/classifier) that gives us a
 very bare bones implementation of a Bayesian classifier to build upon.
 
-\pagebreak
-
 <!-- What's been tried and implemented -->
 ## Design and Implementation
 
@@ -146,13 +144,10 @@ The primary commands the tool supports are as follows:
 
  * `get-examples` - Allows the user to download example training data used to
    test the library.
-
  * `train` - Allows the user to train the tool from one or many email messages.
-
  * `classify` - Classifies a given email message as either ham or spam.
-
  * `stats` - Classifies a set of messages and outputs statistics about the
-   classifications. This can only be used when the types of each message is known.
+   classifications.
 
 For the purpose of the project, attention was primarily focused on the ability
 of the CLI tool to train from messages, to classify messages, and to print out
