@@ -28,9 +28,65 @@ classifications.
 ## Approach
 
 Karat Sleuth was developed to combat the problems of spam categorization in a
-clear and robust ruby library which may also be accessed as a command line
-tool. It is a spam email detection tool which uses various heuristics and can
-continually learn what is and what is not spam.
+clear and robust ruby library. We also intend to expose the functionality of
+this library through a straight forward and intuitive command line interface
+allowing the user to access all of the functionality of the library.
+
+Because we are using the Ruby scripting language, the most obvious choice for
+creating a library that other developers may use is to create a "Ruby gem". Gems
+are a collection of ruby scripts that include meta-data about the library and
+logic to load scripts into other applications. Creating a ruby gem gives us the
+added bonus that it becomes quite straight forward to add dependencies on other
+libraries to our own. This gives us the option to leverage other well supported
+open source libraries and stop re-inventing the wheel.
+
+After some instal considerations on how we would like to classify messages we
+defined heuristics we hoped to use to classify messages:
+
+ * **Bayesian Classifier**\
+   This will be the primary means of message classification which will be used
+   to calculate the base probability that something is a _spam_ or _ham_
+   message. Bayesian classification essential allows us to, given a large set of
+   data with a known classification, 'learn' from this data and then use that
+   information to probabilistically determine the classification of a message.
+   We will be using the message subject and body to learn from the words in the
+   message and use them to classify the message.
+
+ * **DKIM Signature Verification**\
+   When a email message is sent from a server, one of the things that can be
+   done to the message to prove it's authenticity is to 'digitally sign' the
+   email which can verify the contents of the message and who the message was
+   sent by. This is done by using a public / private key. Where the private key
+   is used to sign the message and the public key is stored in a domains DNS
+   records and can be used to verify the signature. We can use this to determine
+   if a message has a valid signature, or if it has no signature at all and
+   aggregate this into the classification probability.
+
+ * **Reverse DNS Lookup (PTR Records)**\
+   Another technical way to verify the identity of the message sender is by
+   ensuring that the message was sent by the same server that is linked to the
+   domain in the `From:` field of the message. Using a reverse DNS lookup to
+   determine the host name assigned to an IP we can determine this. Again, we
+   can use this information to aggregate the classification probability.
+
+ * **Plain Text and HTML Combinations**\
+   Spam emails are commonly sent as HTML emails due to various techniques for
+   bypassing the spam filters (such as embedding invisible HTML tags), many
+   times when they are sent as HTML emails no Plain Text version of the message
+   will be included. We can use this knowledge to give a negative impact to the
+   classification probability of messages which only have a HTML message body.
+
+ * **Location based classifications**\
+   Doing a geoIP lookup of a given messages sender could be an efficient way to
+   gain some probabilistic information about a message. For example, if a
+   message was sent from a IP located in a territory that is known to relay many
+   messages classified as spam, then we could use this information in our
+   aggregate probability of a message's classification.
+
+If possible, we will be looking for established libraries to help us with these
+tasks. For example, before initial implementation we found that we could use the
+ruby [classifier gem](https://github.com/cardmagic/classifier) that gives us a
+very bare bones implementation of a Bayesian classifier to build upon.
 
 <!-- What's been tried and implemented -->
 ## Design and Implementation
