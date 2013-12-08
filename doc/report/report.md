@@ -5,11 +5,24 @@ Evan Purkhiser, Heather Michaud, Tim Mott
 <!-- Motivation and objects of the project -->
 ## Introduction
 
-Spam has no clear definition, though an email message is considered suspicious
-if it is from an unknown sender, sent in bulk, or simply unwanted. Spam
-messages are the junk mail and Jehovah Witness door-hangups of the internet
-world. On the contrary, ham messages are emails that are simply not spam.  Ham
-messages are emails that the user would find important, desired, or personal.
+Spam has no clear definition, an email message may be considered suspicious if
+it is from an unknown sender, sent in bulk, or simply unwanted. These messages
+are the junk mail and Jehovah Witness door-hangups of the internet world.
+Because of this fuzzy definition of what spam is it can be difficult to
+accurately classify a message as spam. Depending on the email client and how well
+it is able to classify spam you may not even notice it as a problem. To add to
+the problem of spam classification, it's also important to not incorrectly mark
+emails that are important to the user as spam. These messages are known as ham
+messages, emails that are simply not spam. Ham messages are emails that the user
+would find important, desired, or personal.
+
+There are many different ways to classify email messages as spam. Our objective
+of the Karat-Sleuth project was to create a library that would allow anyone to
+easily classify one or many email messages as either ham or spam. We would do
+this using various spam heuristics. The primary heuristic we planned to use was
+Bayesian filtering, but we also planned to investigate other heuristics such as
+DKIM signature lookup, reverse DNS lookup, and some more trivial boolean
+classifications.
 
 <!-- Basic idea of methods or structures proposed to develop the project -->
 ## Approach
