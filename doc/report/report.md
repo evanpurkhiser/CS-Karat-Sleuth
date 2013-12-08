@@ -174,3 +174,24 @@ deployment will be possible.
 
 <!-- Team members and their contribution to the project -->
 ## Remarks
+
+All team members contributed in some way to the makings of Karat Sleuth.
+
+Evan contributed to writing the report, preparing presentations, printing a
+progress indicator of classified messages, implementing the library API,
+normalizing training and testing data, creating the command to automatically
+download data sets, and parsing command line arguments. He was also responsible
+for implementing the command line interface, implementing the command to train
+the tool with a specified data set or path, made it possible to persist the
+classifier and reload it, and kept the necessary ruby-isms in check.
+
+Heather contributed to writing the report, preparing presentations, outputting
+running statistics on mail sets, calculating and displaying the confusion
+matrix, printing a progress indicator of classified messages, implementing the
+first round of the tool's command line interface, and reading in mail. She also
+implemented the command to statistically classify a set of messages or path to a
+message.
+
+Tim contributed to the set-up for the first presentation and collaborated with
+teammates to discuss potential work. He also contributed ideas and notions for
+working together on design documentation methods.
