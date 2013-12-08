@@ -1,4 +1,4 @@
-# Karat-Seluth: A Ruby Spam Classifier
+# Karat Seluth: A Ruby Spam Classifier
 
 Evan Purkhiser, Heather Michaud, Tim Mott
 
@@ -17,7 +17,7 @@ messages, emails that are simply not spam. Ham messages are emails that the user
 would find important, desired, or personal.
 
 There are many different ways to classify email messages as spam. Our objective
-of the Karat-Sleuth project was to create a library that would allow anyone to
+of the Karat Sleuth project was to create a library that would allow anyone to
 easily classify one or many email messages as either ham or spam. We would do
 this using various spam heuristics. The primary heuristic we planned to use was
 Bayesian filtering, but we also planned to investigate other heuristics such as
