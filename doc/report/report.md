@@ -96,6 +96,8 @@ tasks. For example, before initial implementation we found that we could use the
 ruby [classifier gem](https://github.com/cardmagic/classifier) that gives us a
 very bare bones implementation of a Bayesian classifier to build upon.
 
+\pagebreak
+
 <!-- What's been tried and implemented -->
 ## Design and Implementation
 
