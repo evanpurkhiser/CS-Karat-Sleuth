@@ -5,91 +5,91 @@ Evan Purkhiser, Heather Michaud, Tim Mott
 <!-- Motivation and objects of the project -->
 ## Introduction
 
-Spam has no clear definition, an email message may be considered suspicious if
+Spam has no clear definition. An email message may be considered suspicious if
 it is from an unknown sender, sent in bulk, or simply unwanted. These messages
 are the junk mail and Jehovah Witness door-hangups of the internet world.
-Because of this fuzzy definition of what spam is it can be difficult to
-accurately classify a message as spam. Depending on the email client and how well
-it is able to classify spam you may not even notice it as a problem. To add to
-the problem of spam classification, it's also important to not incorrectly mark
-emails that are important to the user as spam. These messages are known as ham
-messages, emails that are simply not spam. Ham messages are emails that the user
-would find important, desired, or personal.
+Because of this fuzzy definition of what spam is, it can be difficult to
+accurately classify a message as spam. Depending on the email client and how
+well it is able to classify spam, one may not even notice it as a problem. To
+add to the difficulties of spam classification, it is also important to not
+incorrectly mark emails that are important to the user as spam. These messages
+are known as ham messages - emails that are simply not spam. Ham messages are
+emails that the user would find important, desired, or personal.
 
 There are many different ways to classify email messages as spam. Our objective
 of the Karat Sleuth project was to create a library that would allow anyone to
-easily classify one or many email messages as either ham or spam. We would do
-this using various spam heuristics. The primary heuristic we planned to use was
-Bayesian filtering, but we also planned to investigate other heuristics such as
-DKIM signature lookup, reverse DNS lookup, and some more trivial boolean
-classifications.
+easily classify one or many email messages as either ham or spam. We
+accomplished this using various spam heuristics. The primary heuristic we
+planned to use was Bayesian filtering, though we also planned to investigate
+other heuristics, such as DKIM signature lookup, reverse DNS lookup, and some
+additional trivial boolean classifications.
 
 <!-- Basic idea of methods or structures proposed to develop the project -->
 ## Approach
 
 Karat Sleuth was developed to combat the problems of spam categorization in a
-clear and robust ruby library. We also intend to expose the functionality of
-this library through a straight forward and intuitive command line interface
-allowing the user to access all of the functionality of the library.
+clear and robust ruby library. The authors' approach was to expose the
+functionality of this library through a straight forward and intuitive command
+line interface allowing the user to access all of the functionality of the
+library.
 
-We decided to use the ruby scripting language due to it's extremely expansive
-standard library and it's intuitive yet powerful syntax. This would allow us to
-rapidly prototype the tool and leave room for performance improvements after we
-had a working implementation, the ruby language allows for just this. Although
-only one of the three team members had any extensive experience with ruby, it
-was decided that it would be fun and interesting for the rest of the team to
-pick up.
+It was decided to use the ruby scripting language due to its extremely expansive
+standard library and its intuitive, yet powerful, syntax. This would allow the
+tool to be rapidly prototyped and leave room for performance improvements after
+a working implementation had been established. The ruby language was incredibly
+conducive to the aforementioned needs. Although only one of the three authors
+had an extensive experience with ruby, it was decided that it would be fun and
+interesting for the rest of the team to pick up.
 
-Because we are using the Ruby scripting language, the most obvious choice for
-creating a library that other developers may use is to create a "Ruby gem".
+Because the Ruby scripting language was being used, the most obvious choice for
+creating a library that other developers could use was to create a "Ruby gem".
 Gems are a collection of ruby scripts that include meta-data about the library
-and logic to load the scripts into other applications. Creating a ruby gem
-gives us the added bonus that it becomes quite straight forward to add
-dependencies on other libraries to our own. This gives us the option to
-leverage other well supported open source libraries and stop re-inventing the
-wheel.
+and logic to load the scripts into other applications. Creating a ruby gem gave
+the added bonus that it became quite straight forward to add dependencies on
+other libraries to Karat Sleuth. This allowed for the option to leverage other
+well supported open source libraries and stop re-inventing the wheel.
 
-After some initial considerations on how we would like to classify messages we
+After some initial considerations on how we would like to classify messages, we
 defined heuristics we hoped to use to classify messages:
 
  * **Bayesian Classifier**\
    This will be the primary means of message classification which will be used
    to calculate the base probability that something is a _spam_ or _ham_
-   message. Bayesian classification essential allows us to, given a large set of
-   data with a known classification, 'learn' from this data and then use that
+   message. Bayesian classification essentially allows us to, given a large set
+   of data with a known classification, 'learn' from this data and then use that
    information to probabilistically determine the classification of a message.
    We will be using the message subject and body to learn from the words in the
    message and use them to classify the message.
 
  * **DKIM Signature Verification**\
-   When a email message is sent from a server, one of the things that can be
-   done to the message to prove it's authenticity is to 'digitally sign' the
-   email which can verify the contents of the message and who the message was
-   sent by. This is done by using a public / private key. Where the private key
-   is used to sign the message and the public key is stored in a domains DNS
-   records and can be used to verify the signature. We can use this to determine
-   if a message has a valid signature, or if it has no signature at all and
-   aggregate this into the classification probability.
+   When an email message is sent from a server, one of the things that can be
+   done to the message to prove its authenticity is to 'digitally sign' the
+   email which can verify the contents of the message, as well as who the
+   message was sent by. This is done by using a public / private key. The
+   private key is used to sign the message and the public key is stored in a
+   domains DNS records and can be used to verify the signature. This can be used
+   to determine if a message has a valid signature, or if it has no signature at
+   all and aggregate this into the classification probability.
 
  * **Reverse DNS Lookup (PTR Records)**\
    Another technical way to verify the identity of the message sender is by
    ensuring that the message was sent by the same server that is linked to the
    domain in the `From:` field of the message. Using a reverse DNS lookup to
-   determine the host name assigned to an IP we can determine this. Again, we
-   can use this information to aggregate the classification probability.
+   determine the host name assigned to an IP we can determine this. Again, this
+   information can be used to aggregate the classification probability.
 
  * **Plain Text and HTML Combinations**\
    Spam emails are commonly sent as HTML emails due to various techniques for
-   bypassing the spam filters (such as embedding invisible HTML tags), many
-   times when they are sent as HTML emails no Plain Text version of the message
-   will be included. We can use this knowledge to give a negative impact to the
+   bypassing the spam filters (such as embedding invisible HTML tags). Often
+   when messages are sent as HTML emails, no Plain Text version of the message
+   will be included. This knowledge can be used to give a negative impact to the
    classification probability of messages which only have a HTML message body.
 
  * **Location based classifications**\
    Doing a geoIP lookup of a given messages sender could be an efficient way to
    gain some probabilistic information about a message. For example, if a
    message was sent from a IP located in a territory that is known to relay many
-   messages classified as spam, then we could use this information in our
+   messages classified as spam, then this information could be used in the
    aggregate probability of a message's classification.
 
 If possible, we will be looking for established libraries to help us with these
@@ -104,13 +104,13 @@ very bare bones implementation of a Bayesian classifier to build upon.
 
 ### Library Design
 
-During our initial design concepts for Karat Sleuth we wanted to provide a
-straight forward interface to anyone using the library in their application. This
-means defining what task the library should be responsible for:
+During our initial design concepts for Karat Sleuth, we wanted to provide a
+straight forward interface to anyone using the library in their application.
+This means defining what task the library should be responsible for:
 
  1. Allow the library to be continuously trained based on messages of a known
-    classification. This would be useful for example when implementing the
-    library into a online email client: When the client user marked something as
+    classification. This would be useful, for example, when implementing the
+    library into an online email client. When the client user marked something as
     spam the library could be trained from that particular message.
 
  2. Allow the library to take a single raw email message, either read from a
@@ -118,31 +118,31 @@ means defining what task the library should be responsible for:
     spam. It should also be possible to extract the probabilities that the
     message is either ham or spam using a similar API call.
 
- 3. Provide a interface to add additional modules to the pipeline for
+ 3. Provide an interface to add additional modules to the pipeline for
     classification and for training of the classifier.
 
-Since we have numerous ways to aggregate classification probabilities for a
-email message we decided the best way to design the library would be to take a
-modular 'pipelined' approach to the classification process. The library would be
-designed to have two pipelines, one for training the library and one for
-classifying the library.
+Since there are numerous ways to aggregate classification probabilities for an
+email message, it was decided that the best way to design the library would be
+to take a modular 'pipelined' approach to the classification process. The
+library would be designed to have two pipelines, one for training the library
+and one for classifying the library.
 
-Currently, the only module that we have implemented in the classifier and
+Currently, the only module that has been implemented in the classifier and
 training pipeline is the 'Bayesian classifier'. This uses the ruby classifier
-gem (as mentioned earlier) as a bare bone implementation of the classifier.
-We've also extended this to persist the classification information into a SQLite
-database file that will be stored on disk. We can then reload this file on
+gem (as mentioned earlier) as a bare bone implementation of the classifier. This
+has also been extended to persist the classification information into a SQLite
+database file that will be stored on disk. Users can then reload this file on
 subsequent reloads of the library into memory.
 
 ### Command Line Tool Design
 
-Since we were developing a library, it's important that we also designed a
-application that would use our library for a reference implementation. We
+Since we were developing a library, it is important that we also designed an
+application that would use our library for a reference implementation. It was
 decided that the best way to do this would be to develop a command line tool and
 to bundle it with the gem itself. The goal of this tool was to expose all of the
 libraries functionality through a CLI interface.
 
-The primary commands the tool supports are as follows
+The primary commands the tool supports are as follows:
 
  * `get-examples` - Allows the user to download example training data used to
    test the library.
@@ -154,9 +154,9 @@ The primary commands the tool supports are as follows
  * `stats` - Classifies a set of messages and outputs statistics about the
    classifications. This can only be used when the types of each message is known.
 
-For the purpose of our project we primarily focused on the ability of the CLI
-tool to train from messages and to classify messages and print out statistics
-about the classifications (using the `stats` command).
+For the purpose of the project, attention was primarily focused on the ability
+of the CLI tool to train from messages, to classify messages, and to print out
+statistics regarding the classifications (using the `stats` command).
 
 <!-- What's been accomplished -->
 ## Results
@@ -171,14 +171,20 @@ and 50% (5,000) ham. The next set included a total of 6,333 messages with 80%
 (5,333) spam and 20% (1,333) ham. The final data set incorporated a sum of
 5,801 messages with 90% (5,333) spam and 10% (468) ham. The resulting confusion
 matrices displaying the actual classification versus the predicted
-classification are shown in figures 1-3.
+classification are shown in Figures 1-3.
 
 The predictive classifications are the columns while the actual classifications
-are the rows.  For example, in Figure 1, 99.9% of the ham messages provided in
+are the rows. For example, in Figure 1, 99.9% of the ham messages provided in
 the testing set were correctly identified as ham, where as 39.8% of the spam
 messages provided were false positives of spam. Only 4 of the 5,000 ham messages
 were incorrectly identified as spam, where 60.2% of the spam messages provided
 in the data set were correctly identified as spam.
+
+The authors were primarily concerned with keeping the ham identification
+accuracy levels high so that the tool would interfere as little as possible with
+the user. Incorrectly identifying ham messages as spam would put important and
+possibly critical information sent to the user into his spam folder, which would
+require a traversal of both the "Inbox" and "Junk Mail". 
 
 ### Figure. 1. 50/50 Spam-Ham Confusion Matrix
 
