@@ -101,6 +101,38 @@ very bare bones implementation of a Bayesian classifier to build upon.
 <!-- What's been tried and implemented -->
 ## Design and Implementation
 
+### Library Design
+
+During our initial design concepts for Karat Sleuth we wanted to provide a
+straight forward interface to anyone using the library in their application. This
+means defining what task the library should be responsible for:
+
+ 1. Allow the library to be continuously trained based on messages of a known
+    classification. This would be useful for example when implementing the
+    library into a online email client: When the client user marked something as
+    spam the library could be trained from that particular message.
+
+ 2. Allow the library to take a single raw email message, either read from a
+    file or passed in as a string, and classify that message as either ham or as
+    spam. It should also be possible to extract the probabilities that the
+    message is either ham or spam using a similar API call.
+
+ 3. Provide a interface to add additional modules to the pipeline for
+    classification and for training of the classifier.
+
+Since we have numerous ways to aggregate classification probabilities for a
+email message we decided the best way to design the library would be to take a
+modular 'pipelined' approach to the classification process. The library would be
+designed to have two pipelines, one for training the library and one for
+classifying the library.
+
+Currently, the only module that we have implemented in the classifier and
+training pipeline is the 'Bayesian classifier'. This uses the ruby classifier
+gem (as mentioned earlier) as a bare bone implementation of the classifier.
+We've also extended this to persist the classification information into a SQLite
+database file that will be stored on disk. We can then reload this file on
+subsequent reloads of the library into memory.
+
 Karat Sleuth is written as a ruby gem with an intuitive command line interface
 and library. It performs bayesian filtering on the email subject and body
 content. Commands for the tool include downloading and normalizing testing and
