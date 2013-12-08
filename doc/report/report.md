@@ -32,6 +32,14 @@ clear and robust ruby library. We also intend to expose the functionality of
 this library through a straight forward and intuitive command line interface
 allowing the user to access all of the functionality of the library.
 
+We decided to use the ruby scripting language due to it's extremely expansive
+standard library and it's intuitive ye powerful syntax. This would allow us to
+rapidly prototype the tool and leave room for performance improvements after we
+had a working implementation, the ruby language allows for just this. Although
+only one of the three team members had any extensive experience with ruby, it
+was decided that it would be fun and interesting for the lest of the team to
+pick up.
+
 Because we are using the Ruby scripting language, the most obvious choice for
 creating a library that other developers may use is to create a "Ruby gem". Gems
 are a collection of ruby scripts that include meta-data about the library and
