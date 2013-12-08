@@ -155,5 +155,22 @@ provided in the data set were correctly identified as spam.
 <!-- What's been learned and what's the next step -->
 ## Conclusion & Future Work
 
+Ultimately, we learned how to implement an incrementally learning system that
+can continuously improve its classification results. During our implementation,
+we were educated on the specifics of the ruby language as well as Bayesian
+filtering calculations. A naive Bayes classifier takes a bags of words that have
+been classified into a specific category, then separates and organizes the
+unique words into a database containing the frequency that each word has
+appeared in each category. From this collection, any new bag of words can be
+queried by word to perform a classification of the entire text. Spam filtering
+is possible in this way.
+
+Future work includes adding classifiers to the pipeline so that emails can be
+classified using DKIM signature verification, reverse DNS lookup (PTR records),
+plain text and HTML combination, and location based classification. Once these
+modifications have been made, we believe that the accuracy of Karat Sleuth's
+spam classification can be improved to such an extent that application
+deployment will be possible.
+
 <!-- Team members and their contribution to the project -->
 ## Remarks
